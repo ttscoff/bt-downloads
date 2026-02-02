@@ -1,4 +1,25 @@
-## 1.0.0 — Initial release
+### 1.0.1
+
+2026-02-02 08:09
+
+#### CHANGED
+
+- Created and Updated dates use datetime-local inputs (date and time) instead of text; stored as YYYY-MM-DD HH:mm.
+
+#### NEW
+
+- Card preview meta box on download edit screen with iframe and "Preview with site theme" link.
+- AJAX card preview for template/CSS settings so both template and custom CSS update the preview.
+- "Set to current date/time" link for Created and Updated date fields in the download editor.
+
+#### IMPROVED
+
+- Template sanitization preserves {{variable}} and style="{{...}}" placeholders; only strips script tags and event handlers.
+- Default download card template and CSS: icon wrap is a link, new layout and typography, default download icon SVG overlay, .dl-meta for published/updated.
+
+### 1.0.0
+
+2026-02-01 08:00
 
 - **New**: Adds a custom `Downloads` post type with fields for file URL, version, description, info link, icon, and changelog.
 - **New**: Download card system with editable HTML template (Mustache-style `{{variable}}` and `{{#variable}}…{{/variable}}` conditionals).

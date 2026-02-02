@@ -3,7 +3,7 @@
  * Plugin Name: BT Downloads
  * Plugin URI: https://github.com/ttscoff/bt-downloads/
  * Description: Download cards with editable template and custom CSS. Shortcode [download] for insertable download cards.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Brett Terpstra
  * Author URI: https://brettterpstra.com
  * License: GPLv2 or later
