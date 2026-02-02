@@ -38,6 +38,26 @@
     frame.open();
   }
 
+  function setNowForDatetimeField(inputId) {
+    var el = document.getElementById(inputId);
+    if (!el || el.type !== "datetime-local") return;
+    var d = new Date();
+    var pad = function (n) {
+      return n < 10 ? "0" + n : String(n);
+    };
+    var value =
+      d.getFullYear() +
+      "-" +
+      pad(d.getMonth() + 1) +
+      "-" +
+      pad(d.getDate()) +
+      "T" +
+      pad(d.getHours()) +
+      ":" +
+      pad(d.getMinutes());
+    el.value = value;
+  }
+
   $(function () {
     $(document).on("click", ".btdl-upload-file", function () {
       var target = $(this).data("target");
@@ -49,6 +69,12 @@
           ? "Select or upload icon image"
           : "Select or upload download file"
       });
+    });
+
+    $(document).on("click", ".btdl-set-now", function (e) {
+      e.preventDefault();
+      var target = $(this).data("target");
+      if (target) setNowForDatetimeField(target);
     });
   });
 })(jQuery);

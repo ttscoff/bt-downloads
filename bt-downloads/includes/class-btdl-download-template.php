@@ -26,28 +26,65 @@ class BTDL_Download_Template
 	public static function get_default_template()
 	{
 		return '<div class="download btdl-download-card" id="dlbox">
-	<div class="dl-icon-wrap">
-		<p class="dl-icon" style="{{icon_style}}"><a href="{{file}}" title="Download {{title_str}}"></a></p>
-	</div>
+	<a class="dl-icon-wrap" href="{{file}}" title="Download {{title_str}}">
+		<span class="dl-icon" style="{{icon_style}}"></span>
+	</a>
 	<div class="dl-content">
-		<h4>{{title_str}}</h4>
-		<div class="dl-body">
+		<h3 class="dl-title">{{title_str}}</h3>
 		<p class="dl-link"><a href="{{file}}" title="Download {{title_str}}">Download {{title_str}}</a></p>
 		{{#description}}
 		<p class="dl-description">{{description}}</p>
 		{{/description}}
-		{{#created_formatted}}
-		<p class="dl-published">Published {{created_formatted}}.</p>
-		{{/created_formatted}}
-		{{#updated_formatted}}
-		<p class="dl-updated">Updated {{updated_formatted}}.{{#changelog_url}} {{changelog_link}}{{/changelog_url}}</p>
-		{{/updated_formatted}}
+		<div class="dl-meta">
+			{{#created_formatted}}
+			<span class="dl-published">Published {{created_formatted}}.</span>
+			{{/created_formatted}}
+			{{#updated_formatted}}
+			<span class="dl-updated">Updated {{updated_formatted}}.{{#changelog_url}} {{changelog_link}}{{/changelog_url}}</span>
+			{{/updated_formatted}}
+		</div>
 		{{#info}}
 		<p class="dl-info"><a href="{{donate_url}}">Donate</a> &bull; <a href="{{info}}" title="More information on {{title}}">More info&hellip;</a></p>
 		{{/info}}
-		</div>
 	</div>
 </div>';
+	}
+
+	/**
+	 * Sample data for admin preview (same shape as get_template_data output).
+	 *
+	 * @return array
+	 */
+	public static function get_preview_sample_data()
+	{
+		return array(
+			'title' => 'Sample Download',
+			'title_str' => 'Sample Download v1.0',
+			'file' => '#',
+			'version' => '1.0',
+			'description' => 'A sample description for the preview.',
+			'info' => '#',
+			'icon_style' => '',
+			'created_formatted' => '01/09/14',
+			'updated_formatted' => '09/14/20',
+			'changelog_url' => '#',
+			'changelog_link' => '<a href="#" class="changelog">Changelog</a>',
+			'donate_url' => '#',
+		);
+	}
+
+	/**
+	 * Default download icon SVG (minimalistic, 24x24 viewBox).
+	 *
+	 * @return string
+	 */
+	private static function get_download_icon_data_uri()
+	{
+		$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">'
+			. '<path opacity="0.5" d="M3 15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+			. '<path d="M12 3V16M12 16L16 11.625M12 16L8 11.625" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+			. '</svg>';
+		return 'data:image/svg+xml,' . rawurlencode($svg);
 	}
 
 	/**
@@ -57,84 +94,106 @@ class BTDL_Download_Template
 	 */
 	public static function get_default_css()
 	{
-		return '/* BT Downloads - flexbox layout */
+		$download_icon_uri = self::get_download_icon_data_uri();
+		return '/* BT Downloads - card layout (low specificity for overrides) */
 .btdl-download-card {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
-	gap: 1rem;
+	gap: 1.25rem;
 	max-width: 100%;
-	border: 1px solid currentColor;
-	border-radius: 6px;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
 	overflow: hidden;
 	font-family: inherit;
-	font-size: inherit;
-	color: inherit;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #374151;
+	background: #fff;
 }
 .btdl-download-card .dl-icon-wrap {
-	flex: 0 0 100px;
-	min-width: 100px;
+	flex: 0 0 112px;
+	min-width: 112px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: rgba(0,0,0,.05);
+	background: #f3f4f6;
+	text-decoration: none;
+	color: inherit;
+}
+.btdl-download-card .dl-icon-wrap:hover {
+	background: #e5e7eb;
 }
 .btdl-download-card .dl-icon {
-	width: 80px;
-	height: 80px;
-	margin: 0;
-	border-radius: 4px;
-	background-size: cover !important;
-	background-position: center !important;
-}
-.btdl-download-card .dl-icon a {
 	display: block;
+	position: relative;
 	width: 100%;
 	height: 100%;
+	border-radius: 6px;
+	background-size: cover;
+	background-position: center;
+	background-color: #e5e7eb;
+}
+.btdl-download-card .dl-icon::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 5px;
+	width: 40px;
+	height: 40px;
+	background-image: url(' . $download_icon_uri . ');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	pointer-events: none;
 }
 .btdl-download-card .dl-content {
 	flex: 1;
 	min-width: 0;
-	padding: 0.75rem 1rem 0.75rem 0;
-	display: flex;
-	flex-direction: column;
-	gap: 0.35rem;
+	padding: 1rem 1.25rem 1rem 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.25rem 0;
+	align-content: start;
 }
-.btdl-download-card .dl-content h4 {
-	margin: 0 0 0.25rem;
-	font-size: 1.1em;
-	font-weight: 600;
-	line-height: 1.3;
-}
-.btdl-download-card .dl-body {
+.btdl-download-card .dl-title {
 	margin: 0;
-}
-.btdl-download-card .dl-body p {
-	margin: 0.2em 0;
-	font-size: 0.9em;
-	line-height: 1.4;
+	font-size: 1.125rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: #111827;
 }
 .btdl-download-card .dl-link {
+	margin: 0.25rem 0 0;
 	font-weight: 500;
+	font-size: 0.9375rem;
 }
-.btdl-download-card .dl-link a {
-	color: inherit;
-	text-decoration: underline;
+.btdl-download-card .dl-description {
+	margin: 0.5rem 0 0;
+	font-size: 0.9375rem;
+	line-height: 1.5;
+	color: #6b7280;
 }
-.btdl-download-card .dl-link a:hover {
-	text-decoration: none;
+.btdl-download-card .dl-meta {
+	margin: 0.5rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.4;
+	color: #9ca3af;
 }
-.btdl-download-card .dl-published,
-.btdl-download-card .dl-updated {
-	font-size: 0.85em;
-	opacity: 0.85;
+.btdl-download-card .dl-meta .dl-published + .dl-updated::before {
+	content: " · ";
 }
 .btdl-download-card .dl-info {
-	margin-top: 0.5rem !important;
+	margin: 0.5rem 0 0;
+	font-size: 0.8125rem;
+	color: #9ca3af;
 }
 .btdl-download-card .dl-info a {
 	color: inherit;
 	text-decoration: underline;
+}
+.btdl-download-card .dl-info a:hover {
+	color: #6b7280;
 }
 .btdl-download-card .changelog {
 	text-decoration: underline;

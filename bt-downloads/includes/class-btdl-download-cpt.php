@@ -41,6 +41,9 @@ class BTDL_Download_CPT
 		add_filter('upload_dir', array(__CLASS__, 'filter_upload_dir'));
 		add_action('admin_menu', array(__CLASS__, 'add_template_submenu'), 20);
 		add_action('admin_init', array(__CLASS__, 'save_template_settings'));
+		add_action('wp_ajax_btdl_card_preview', array(__CLASS__, 'ajax_card_preview'));
+		add_action('init', array(__CLASS__, 'register_preview_query_var'));
+		add_action('template_redirect', array(__CLASS__, 'frontend_card_preview'));
 	}
 
 	/**
@@ -98,6 +101,14 @@ class BTDL_Download_CPT
 			self::POST_TYPE,
 			'side'
 		);
+		add_meta_box(
+			'btdl_download_preview',
+			__('Card preview', 'bt-downloads'),
+			array(__CLASS__, 'render_preview_meta_box'),
+			self::POST_TYPE,
+			'normal',
+			'low'
+		);
 	}
 
 	/**
@@ -117,6 +128,31 @@ class BTDL_Download_CPT
 	}
 
 	/**
+	 * Render card preview meta box on download edit screen.
+	 *
+	 * @param WP_Post $post Post object.
+	 */
+	public static function render_preview_meta_box($post)
+	{
+		$preview_url = home_url('/?btdl_card_preview=1&btdl_download_id=' . (int) $post->ID);
+		?>
+		<p class="description" style="margin-bottom: 8px;">
+			<?php esc_html_e('How this download will look with the current card template.', 'bt-downloads'); ?>
+		</p>
+		<div class="btdl-edit-preview-wrap"
+			style="border: 1px solid #c3c4c7; border-radius: 4px; overflow: hidden; background: #fff;">
+			<iframe id="btdl_edit_preview" title="<?php esc_attr_e('Card preview', 'bt-downloads'); ?>"
+				style="width: 100%; height: 220px; border: none; display: block;"
+				src="<?php echo esc_url($preview_url); ?>"></iframe>
+		</div>
+		<p style="margin-top: 8px;">
+			<a href="<?php echo esc_url($preview_url); ?>" target="_blank" rel="noopener"
+				class="button button-small"><?php esc_html_e('Preview with site theme', 'bt-downloads'); ?></a>
+		</p>
+		<?php
+	}
+
+	/**
 	 * Render meta box.
 	 *
 	 * @param WP_Post $post Post object.
@@ -132,6 +168,8 @@ class BTDL_Download_CPT
 		$updated = get_post_meta($post->ID, self::META_UPDATED, true);
 		$created = get_post_meta($post->ID, self::META_CREATED, true);
 		$changelog = get_post_meta($post->ID, self::META_CHANGELOG, true);
+		$updated_value = self::format_datetime_for_input($updated);
+		$created_value = self::format_datetime_for_input($created);
 		?>
 		<table class="form-table">
 			<tr>
@@ -168,14 +206,28 @@ class BTDL_Download_CPT
 				</td>
 			</tr>
 			<tr>
-				<th><label for="btdl_download_updated"><?php esc_html_e('Updated date', 'bt-downloads'); ?></label></th>
-				<td><input type="text" id="btdl_download_updated" name="btdl_download_updated"
-						value="<?php echo esc_attr($updated); ?>" class="regular-text" placeholder="YYYY-MM-DD"></td>
+				<th><label for="btdl_download_created"><?php esc_html_e('Created date', 'bt-downloads'); ?></label></th>
+				<td>
+					<input type="datetime-local" id="btdl_download_created" name="btdl_download_created"
+						value="<?php echo esc_attr($created_value); ?>" class="regular-text btdl-datetime-field"
+						data-format="yyyy-MM-DD HH:mm" step="60">
+					<p class="description" style="margin-top: 4px;">
+						<a href="#" class="btdl-set-now"
+							data-target="btdl_download_created"><?php esc_html_e('Set to current date/time', 'bt-downloads'); ?></a>
+					</p>
+				</td>
 			</tr>
 			<tr>
-				<th><label for="btdl_download_created"><?php esc_html_e('Created date', 'bt-downloads'); ?></label></th>
-				<td><input type="text" id="btdl_download_created" name="btdl_download_created"
-						value="<?php echo esc_attr($created); ?>" class="regular-text" placeholder="YYYY-MM-DD"></td>
+				<th><label for="btdl_download_updated"><?php esc_html_e('Updated date', 'bt-downloads'); ?></label></th>
+				<td>
+					<input type="datetime-local" id="btdl_download_updated" name="btdl_download_updated"
+						value="<?php echo esc_attr($updated_value); ?>" class="regular-text btdl-datetime-field"
+						data-format="yyyy-MM-DD HH:mm" step="60">
+					<p class="description" style="margin-top: 4px;">
+						<a href="#" class="btdl-set-now"
+							data-target="btdl_download_updated"><?php esc_html_e('Set to current date/time', 'bt-downloads'); ?></a>
+					</p>
+				</td>
 			</tr>
 			<tr>
 				<th><label for="btdl_download_changelog"><?php esc_html_e('Changelog URL', 'bt-downloads'); ?></label></th>
@@ -224,6 +276,10 @@ class BTDL_Download_CPT
 			if ($input === 'btdl_download_description') {
 				$value = isset($_POST[$input]) ? sanitize_textarea_field(wp_unslash($_POST[$input])) : '';
 			}
+			// Store datetime as yyyy-MM-DD HH:mm (datetime-local submits with T).
+			if ($input === 'btdl_download_updated' || $input === 'btdl_download_created') {
+				$value = str_replace('T', ' ', $value);
+			}
 			update_post_meta($post_id, $meta_key, $value);
 		}
 	}
@@ -247,6 +303,22 @@ class BTDL_Download_CPT
 			'created' => get_post_meta($post->ID, self::META_CREATED, true),
 			'changelog' => get_post_meta($post->ID, self::META_CHANGELOG, true),
 		);
+	}
+
+	/**
+	 * Format stored date for datetime-local input (Y-m-d\TH:i). Empty or invalid returns ''.
+	 *
+	 * @param string $raw Raw meta value (e.g. Y-m-d or Y-m-d H:i).
+	 * @return string
+	 */
+	public static function format_datetime_for_input($raw)
+	{
+		$raw = trim((string) $raw);
+		if ($raw === '') {
+			return '';
+		}
+		$ts = strtotime($raw);
+		return $ts ? date('Y-m-d\TH:i', $ts) : '';
 	}
 
 	/**
@@ -398,8 +470,11 @@ class BTDL_Download_CPT
 		}
 		$saved = false;
 		if (isset($_POST['btdl_template'])) {
-			// HTML template: use wp_kses_post to allow safe HTML
-			$template = wp_kses_post(wp_unslash($_POST['btdl_template']));
+			$template = wp_unslash($_POST['btdl_template']);
+			// wp_kses runs style through safecss_filter_attr() and strips {{...}} placeholders.
+			// Sanitize minimally: remove script tags and event handlers; preserve template HTML and style="{{...}}".
+			$template = preg_replace('/<script\b[^>]*>.*?<\/script>/is', '', $template);
+			$template = preg_replace('/\s+on\w+\s*=\s*["\'][^"\']*["\']/i', '', $template);
 			BTDL_Download_Template::save_template($template);
 			$saved = true;
 		}
@@ -413,6 +488,96 @@ class BTDL_Download_CPT
 			wp_safe_redirect(add_query_arg('updated', '1', wp_get_referer()));
 			exit;
 		}
+	}
+
+	/**
+	 * Register query var for frontend card preview.
+	 */
+	public static function register_preview_query_var()
+	{
+		add_filter('query_vars', function ($vars) {
+			$vars[] = 'btdl_card_preview';
+			$vars[] = 'btdl_download_id';
+			return $vars;
+		});
+	}
+
+	/**
+	 * AJAX: return full HTML document for card preview iframe (plugin styles only).
+	 */
+	public static function ajax_card_preview()
+	{
+		if (!current_user_can('edit_posts')) {
+			wp_send_json_error('Unauthorized', 403);
+		}
+		if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'btdl_card_preview')) {
+			wp_send_json_error('Invalid nonce', 403);
+		}
+		$template = isset($_POST['btdl_template']) ? wp_unslash($_POST['btdl_template']) : '';
+		$custom_css = isset($_POST['btdl_custom_css']) ? wp_unslash($_POST['btdl_custom_css']) : '';
+		if ($template === '') {
+			$template = BTDL_Download_Template::get_template();
+		}
+		$custom_css = trim($custom_css);
+		$default_css = BTDL_Download_Template::get_default_css();
+		$css = $default_css . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : '');
+		$data = BTDL_Download_Template::get_preview_sample_data();
+		$card_html = BTDL_Download_Template::render($template, $data);
+		$doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' . $css . '</style></head><body style="margin:12px;">' . $card_html . '</body></html>';
+		wp_send_json_success(array('html' => $doc));
+	}
+
+	/**
+	 * Frontend card preview: minimal page with theme styles + card (saved template).
+	 */
+	public static function frontend_card_preview()
+	{
+		if (get_query_var('btdl_card_preview') !== '1') {
+			return;
+		}
+		if (!current_user_can('edit_posts')) {
+			return;
+		}
+		$template = BTDL_Download_Template::get_template();
+		$custom_css = trim(BTDL_Download_Template::get_custom_css());
+		$css = BTDL_Download_Template::get_default_css() . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : '');
+		$download_id = (int) get_query_var('btdl_download_id');
+		if ($download_id > 0) {
+			$post = get_post($download_id);
+			if ($post && $post->post_type === self::POST_TYPE && current_user_can('edit_post', $post->ID)) {
+				$row = self::post_to_row($post);
+				$data = BTDL_Download::get_template_data($row);
+			} else {
+				$data = BTDL_Download_Template::get_preview_sample_data();
+			}
+		} else {
+			$data = BTDL_Download_Template::get_preview_sample_data();
+		}
+		$card_html = BTDL_Download_Template::render($template, $data);
+		wp_enqueue_style('btdl-preview-theme', get_stylesheet_uri(), array(), null);
+		ob_start();
+		?>
+		<!DOCTYPE html>
+		<html <?php language_attributes(); ?>>
+
+		<head>
+			<meta charset="<?php bloginfo('charset'); ?>">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<?php wp_head(); ?>
+			<style id="btdl-card-preview-css">
+				<?php echo str_replace('</style>', '', wp_strip_all_tags($css)); ?>
+			</style>
+		</head>
+
+		<body class="btdl-preview-body" style="margin: 1rem; padding: 0;">
+			<?php echo $card_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- preview HTML from plugin template ?>
+			<?php wp_footer(); ?>
+		</body>
+
+		</html>
+		<?php
+		echo ob_get_clean(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		exit;
 	}
 
 	/**
@@ -469,11 +634,28 @@ class BTDL_Download_CPT
 					<tr>
 						<td>
 							<h3><?php esc_html_e('Preview', 'bt-downloads'); ?></h3>
-							<p class="description"><?php esc_html_e('Preview updates as you type.', 'bt-downloads'); ?></p>
+							<p class="description">
+								<?php esc_html_e('Preview updates as you type. Uses the current template and plugin styles.', 'bt-downloads'); ?>
+							</p>
 							<div class="btdl-preview-frame"
 								style="border: 1px solid #c3c4c7; border-radius: 4px; padding: 16px; background: #fff; min-height: 200px; max-width: 500px;">
-								<iframe id="btdl_css_preview" title="<?php esc_attr_e('CSS preview', 'bt-downloads'); ?>"
-									style="width: 100%; height: 220px; border: none; display: block;"></iframe>
+								<iframe id="btdl_css_preview" title="<?php esc_attr_e('Card preview', 'bt-downloads'); ?>"
+									style="width: 100%; height: 240px; border: none; display: block;"></iframe>
+							</div>
+							<p class="description" style="margin-top: 0.75rem;">
+								<?php esc_html_e('Preview with your site theme (saved template):', 'bt-downloads'); ?>
+								<a href="<?php echo esc_url(home_url('/?btdl_card_preview=1')); ?>" target="_blank"
+									rel="noopener"><?php esc_html_e('Open in new tab', 'bt-downloads'); ?></a>
+								<span aria-hidden="true">|</span>
+								<button type="button" class="button button-small"
+									id="btdl_preview_theme_reload"><?php esc_html_e('Reload theme preview below', 'bt-downloads'); ?></button>
+							</p>
+							<div class="btdl-preview-frame"
+								style="border: 1px solid #c3c4c7; border-radius: 4px; padding: 16px; background: #fff; min-height: 200px; max-width: 500px; margin-top: 0.5rem;">
+								<iframe id="btdl_theme_preview"
+									title="<?php esc_attr_e('Card preview with theme', 'bt-downloads'); ?>"
+									style="width: 100%; height: 260px; border: none; display: block;"
+									src="<?php echo esc_url(home_url('/?btdl_card_preview=1')); ?>"></iframe>
 							</div>
 						</td>
 					</tr>
@@ -488,21 +670,50 @@ class BTDL_Download_CPT
 
 			<script>
 				(function () {
-					var defaultCss = <?php echo wp_json_encode(BTDL_Download_Template::get_default_css()); ?>;
-					var sampleHtml = <?php echo wp_json_encode('<div class="download btdl-download-card" id="dlbox"><div class="dl-icon-wrap"><p class="dl-icon" style="background: linear-gradient(0deg, rgb(179, 179, 179) 8%, rgb(255, 255, 255) 45%); background-size: cover; width: 80px; height: 80px; margin: 0;"><a href="#" title="Sample"></a></p></div><div class="dl-content"><h4>Sample Download v1.0</h4><div class="dl-body"><p class="dl-link"><a href="#">Download Sample Download v1.0</a></p><p class="dl-description">A sample description for the preview.</p><p class="dl-published">Published 01/09/14.</p><p class="dl-updated">Updated 09/14/20. <a href="#" class="changelog">Changelog</a></p><p class="dl-info"><a href="#">Donate</a> &bull; <a href="#">More info&hellip;</a></p></div></div></div>'); ?>;
-					var textarea = document.getElementById('btdl_custom_css');
+					var templateTextarea = document.getElementById('btdl_template');
+					var cssTextarea = document.getElementById('btdl_custom_css');
 					var iframe = document.getElementById('btdl_css_preview');
+					var themeIframe = document.getElementById('btdl_theme_preview');
+					var themeReloadBtn = document.getElementById('btdl_preview_theme_reload');
 					var timeout;
+					var previewUrl = <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>;
+
 					function buildPreview() {
-						var customCss = textarea ? textarea.value : '';
-						var css = defaultCss + (customCss ? '\n\n/* Custom */\n' + customCss : '');
-						var doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><style>' + css + '</style></head><body style="margin:12px;font-family:system-ui,sans-serif;font-size:14px;">' + sampleHtml + '</body></html>';
-						if (iframe) iframe.srcdoc = doc;
+						if (!iframe) return;
+						var template = templateTextarea ? templateTextarea.value : '';
+						var customCss = cssTextarea ? cssTextarea.value : '';
+						var formData = new FormData();
+						formData.append('action', 'btdl_card_preview');
+						formData.append('nonce', <?php echo wp_json_encode(wp_create_nonce('btdl_card_preview')); ?>);
+						if (template) formData.append('btdl_template', template);
+						if (customCss) formData.append('btdl_custom_css', customCss);
+						fetch(previewUrl, { method: 'POST', body: formData, credentials: 'same-origin' })
+							.then(function (r) { return r.json(); })
+							.then(function (data) {
+								if (data.success && data.data && data.data.html) {
+									iframe.srcdoc = data.data.html;
+								}
+							})
+							.catch(function () { iframe.srcdoc = ''; });
 					}
-					function debouncedPreview() { clearTimeout(timeout); timeout = setTimeout(buildPreview, 250); }
+					function debouncedPreview() {
+						clearTimeout(timeout);
+						timeout = setTimeout(buildPreview, 300);
+					}
 					buildPreview();
-					if (textarea) textarea.addEventListener('input', debouncedPreview);
-					if (textarea) textarea.addEventListener('change', buildPreview);
+					if (templateTextarea) {
+						templateTextarea.addEventListener('input', debouncedPreview);
+						templateTextarea.addEventListener('change', buildPreview);
+					}
+					if (cssTextarea) {
+						cssTextarea.addEventListener('input', debouncedPreview);
+						cssTextarea.addEventListener('change', buildPreview);
+					}
+					if (themeReloadBtn && themeIframe) {
+						themeReloadBtn.addEventListener('click', function () {
+							themeIframe.src = themeIframe.src;
+						});
+					}
 				})();
 			</script>
 		</div>
