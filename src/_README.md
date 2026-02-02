@@ -51,7 +51,7 @@ When editing a download, you set the file URL, version, description, info URL, i
 
 ## Card template
 
-Under **Downloads → Card template** you can edit the HTML template and custom CSS for download cards. The template uses variables such as `{{title_str}}`, `{{file}}`, `{{version}}`, `{{description}}`, and conditionals like `{{#description}}...{{/description}}`. A live preview updates as you type.
+Under **Downloads -> Card template** you can edit the HTML template and custom CSS for download cards. The template uses variables such as `{{title_str}}`, `{{file}}`, `{{version}}`, `{{description}}`, and conditionals like `{{#description}}...{{/description}}`. A live preview updates as you type.
 
 <!--JEKYLL-->
 {% img aligncenter /uploads/2026/02/download-card-template-800.jpg 694 800 "Download card template and custom CSS with live preview" "Download card template and custom CSS with live preview" %}
