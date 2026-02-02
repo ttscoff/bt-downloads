@@ -1,3 +1,16 @@
+### 1.0.2
+
+2026-02-02 08:19
+
+#### CHANGED
+
+- Created and Updated dates use datetime-local inputs (date and time) instead of text; stored as YYYY-MM-DD HH:mm.
+- Card preview meta box on download edit screen with iframe and "Preview with site theme" link.
+- AJAX card preview for template/CSS settings so both template and custom CSS update the preview.
+- "Set to current date/time" link for Created and Updated date fields in the download editor.
+- Template sanitization preserves {{variable}} and style="{{...}}" placeholders; only strips script tags and event handlers.
+- Default download card template and CSS: icon wrap is a link, new layout and typography, default download icon SVG overlay, .dl-meta for published/updated.
+
 ### 1.0.1
 
 2026-02-02 08:15
