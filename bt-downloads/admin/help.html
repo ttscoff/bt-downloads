@@ -1,0 +1,51 @@
+<p><strong>Requires:</strong> WordPress 5.8+, PHP 7.4+</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Custom post type</strong> for downloads: file URL, version, description, info link, icon, changelog</li>
+<li><strong>Editable HTML template</strong> with Mustache-style conditionals (<code>{{#var}}...{{/var}}</code>)</li>
+<li><strong>Custom CSS</strong> with live-updating preview</li>
+<li><strong>Upload buttons</strong> for file and icon on the download edit screen (files go to <code>uploads/downloads/</code>)</li>
+<li><strong>Insert tools</strong> for classic editor (TinyMCE button) and block editor (Download block)</li>
+<li><strong>WP-CLI import</strong> from CSV: <code>wp btdl import_downloads --file=/path/to/downloads.csv</code></li>
+</ul>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>Upload the <code>bt-downloads</code> folder to <code>/wp-content/plugins/</code>.</li>
+<li>Activate the plugin via <strong>Plugins</strong> in WordPress.</li>
+<li>Use <strong>Downloads</strong> in the admin to add downloads and <strong>Card template</strong> to customize HTML and CSS.</li>
+</ol>
+<h2 id="admin">Admin</h2>
+<p>The plugin adds a <strong>Downloads</strong> item to the WordPress admin menu with sub-items: <strong>Downloads</strong>, <strong>Add New Download</strong>, and <strong>Card template</strong>.</p>
+<p>![Downloads menu in the WordPress admin <a href="images/downloads-sidebar@2x.jpg%5D(mailto:sidebar%5D(images/downloads-sidebar@2x.jpg)" title="Downloads menu with submenu: Downloads, Add New Download, Card template">sidebar</a></p>
+<p>The main <strong>Downloads</strong> screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in <code>[download ID]</code> to embed a card.</p>
+<p>![Downloads list in the WordPress <a href="images/downloads-800@2x.jpg%5D(mailto:admin%5D(images/downloads-800@2x.jpg)" title="Downloads list with title, shortcode ID, version, and date">admin</a></p>
+<p>When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The <strong>Shortcode</strong> meta box shows the exact shortcode (e.g. <code>[download 128]</code>) to use in posts or pages.</p>
+<p>![Edit Download screen with file, version, description, and <a href="images/download-edit-800@2x.jpg%5D(mailto:shortcode%5D(images/download-edit-800@2x.jpg)" title="Edit Download screen with Download Details and Shortcode meta box">shortcode</a></p>
+<h2 id="card-template">Card template</h2>
+<p>Under <strong>Downloads → Card template</strong> you can edit the HTML template and custom CSS for download cards. The template uses variables such as <code>{{title_str}}</code>, <code>{{file}}</code>, <code>{{version}}</code>, <code>{{description}}</code>, and conditionals like <code>{{#description}}...{{/description}}</code>. A live preview updates as you type.</p>
+<p>![Download card template and custom CSS with live <a href="images/download-card-template-800@2x.jpg%5D(mailto:preview%5D(images/download-card-template-800@2x.jpg)" title="Card template editor with HTML, CSS, and preview">preview</a></p>
+<h2 id="inserting-downloads-in-the-editor">Inserting downloads in the editor</h2>
+<h3 id="classic-editor">Classic editor</h3>
+<p>A TinyMCE button opens a <strong>Select a download…</strong> dropdown. Pick a download to insert its shortcode.</p>
+<p>![Classic editor: Select a download <a href="images/download-select@2x.jpg%5D(mailto:dropdown%5D(images/download-select@2x.jpg)" title="Select a download dropdown in the classic editor">dropdown</a></p>
+<h3 id="block-editor">Block editor</h3>
+<p>Add a <strong>Download</strong> block. In the block settings sidebar, use the <strong>Download</strong> dropdown to choose which download to display.</p>
+<p>![Block editor: Download block with sidebar <a href="images/download-block-blank@2x.jpg%5D(mailto:selector%5D(images/download-block-blank@2x.jpg)" title="Download block with 'Select a download...' in the sidebar">selector</a></p>
+<p>After selecting a download, the block shows the card (e.g. title, download link, description) in the editor.</p>
+<p>![Block editor: Download block showing a rendered <a href="images/download-block@2x.jpg%5D(mailto:card%5D(images/download-block@2x.jpg)" title="Download block displaying a download card in the editor">card</a></p>
+<p>You can also use the block toolbar to pick a download when the block is selected.</p>
+<p>![Block editor: Download block toolbar with Download <a href="images/download-select-block@2x.jpg%5D(mailto:option%5D(images/download-select-block@2x.jpg)" title="Download block with Download/File options in the toolbar">option</a></p>
+<p>Or start typing <code>/download</code> to select:</p>
+<p>![Block editor: Download block with <a href="images/download-select@2x.jpg%5D(mailto:/download%5D(images/download-select@2x.jpg)" title="Download block with /download">/download</a></p>
+<h2 id="frontend-output">Frontend output</h2>
+<p>On the frontend, the shortcode (or block) renders a download card: title, download link, description, dates, and optional donate/info links, styled by your template and custom CSS.</p>
+<p>![Example download card on the <a href="images/download-card@2x.jpg%5D(mailto:frontend%5D(images/download-card@2x.jpg)" title="Example download card with icon, title, link, description, and dates">frontend</a></p>
+<h2 id="shortcode">Shortcode</h2>
+<p>Use <code>[download 27]</code> where <code>27</code> is the shortcode ID of the download (shown in the Downloads list and on the edit screen).</p>
+<h2 id="wp-cli">WP-CLI</h2>
+<p>Import downloads from a CSV:</p>
+<pre lang="bash"><code>wp btdl import_downloads --file=/path/to/downloads.csv
+</code></pre>
+<p>CSV columns: <code>id</code>, <code>title</code>, <code>file</code>, <code>version</code>, <code>description</code>, <code>info</code>, <code>icon</code>, <code>updated</code>, <code>created</code>, <code>changelog</code>. Paths starting with <code>/</code> are converted to your uploads URL.</p>
+<h2 id="license">License</h2>
+<p>GPLv2 or later.</p>

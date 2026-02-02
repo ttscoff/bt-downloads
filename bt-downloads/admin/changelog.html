@@ -1,0 +1,21 @@
+<h3 id="101">1.0.1</h3>
+<p>2026-02-02 08:12</p>
+<h4 id="changed">CHANGED</h4>
+<ul>
+<li>Created and Updated dates use datetime-local inputs (date and time) instead of text; stored as YYYY-MM-DD HH:mm.</li>
+<li>Card preview meta box on download edit screen with iframe and “Preview with site theme” link.</li>
+<li>AJAX card preview for template/CSS settings so both template and custom CSS update the preview.</li>
+<li>“Set to current date/time” link for Created and Updated date fields in the download editor.</li>
+<li>Template sanitization preserves {{variable}} and style=”{{…}}” placeholders; only strips script tags and event handlers.</li>
+<li>Default download card template and CSS: icon wrap is a link, new layout and typography, default download icon SVG overlay, .dl-meta for published/updated.</li>
+</ul>
+<h3 id="100">1.0.0</h3>
+<p>2026-02-01 08:00</p>
+<ul>
+<li><strong>New</strong>: Adds a custom <code>Downloads</code> post type with fields for file URL, version, description, info link, icon, and changelog.</li>
+<li><strong>New</strong>: Download card system with editable HTML template (Mustache-style <code>{{variable}}</code> and <code>{{#variable}}…{{/variable}}</code> conditionals).</li>
+<li><strong>New</strong>: Custom CSS editor with live preview for download cards.</li>
+<li><strong>New</strong>: Classic editor integration via TinyMCE button and download picker.</li>
+<li><strong>New</strong>: Block editor integration via a Download block that renders the configured card.</li>
+<li><strong>New</strong>: WP‑CLI import command <code>wp btdl import_downloads --file=/path/to/downloads.csv</code> for bulk-creating downloads from CSV.</li>
+</ul>

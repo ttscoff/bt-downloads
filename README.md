@@ -21,12 +21,16 @@
 The plugin adds a **Downloads** item to the WordPress admin menu with sub-items: **Downloads**, **Add New Download**, and **Card template**.
 
 
+{% img aligncenter /uploads/2026/02/downloads-sidebar.jpg 323 157 "Downloads menu in the WordPress admin sidebar" "Downloads menu in the WordPress admin sidebar" %}
+
 
 ![Downloads menu in the WordPress admin sidebar](images/downloads-sidebar@2x.jpg "Downloads menu with submenu: Downloads, Add New Download, Card template")
-
+<!-- END WP-->
 
 The main **Downloads** screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in `[download ID]` to embed a card.
 
+
+{% img aligncenter /uploads/2026/02/downloads-800.jpg 800 310 "Downloads list in the WordPress admin" "Downloads list in the WordPress admin" %}
 
 
 ![Downloads list in the WordPress admin](images/downloads-800@2x.jpg "Downloads list with title, shortcode ID, version, and date")
@@ -35,14 +39,18 @@ The main **Downloads** screen lists all download entries with title, shortcode I
 When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The **Shortcode** meta box shows the exact shortcode (e.g. `[download 128]`) to use in posts or pages.
 
 
+{% img aligncenter /uploads/2026/02/download-edit-800.jpg 800 522 "Edit Download screen with file, version, description, and shortcode" "Edit Download screen with file, version, description, and shortcode" %}
+
 
 ![Edit Download screen with file, version, description, and shortcode](images/download-edit-800@2x.jpg "Edit Download screen with Download Details and Shortcode meta box")
 
 
 ## Card template
 
-Under **Downloads → Card template** you can edit the HTML template and custom CSS for download cards. The template uses variables such as `{{title_str}}`, `{{file}}`, `{{version}}`, `{{description}}`, and conditionals like `{{#description}}...{{/description}}`. A live preview updates as you type.
+Under **Downloads ??? Card template** you can edit the HTML template and custom CSS for download cards. The template uses variables such as `{{title_str}}`, `{{file}}`, `{{version}}`, `{{description}}`, and conditionals like `{{#description}}...{{/description}}`. A live preview updates as you type.
 
+
+{% img aligncenter /uploads/2026/02/download-card-template-800.jpg 694 800 "Download card template and custom CSS with live preview" "Download card template and custom CSS with live preview" %}
 
 
 ![Download card template and custom CSS with live preview](images/download-card-template-800@2x.jpg "Card template editor with HTML, CSS, and preview")
@@ -55,6 +63,8 @@ Under **Downloads → Card template** you can edit the HTML template and custom 
 A TinyMCE button opens a **Select a download...** dropdown. Pick a download to insert its shortcode.
 
 
+{% img aligncenter /uploads/2026/02/download-select.jpg 1192 570 "Classic editor: Select a download dropdown" "Classic editor: Select a download dropdown" %}
+
 
 ![Classic editor: Select a download dropdown](images/download-select@2x.jpg "Select a download dropdown in the classic editor")
 
@@ -64,12 +74,16 @@ A TinyMCE button opens a **Select a download...** dropdown. Pick a download to i
 Add a **Download** block. In the block settings sidebar, use the **Download** dropdown to choose which download to display.
 
 
+{% img aligncenter /uploads/2026/02/download-block-blank.jpg 596 350 "Block editor: Download block with sidebar selector" "Block editor: Download block with sidebar selector" %}
+
 
 ![Block editor: Download block with sidebar selector](images/download-block-blank@2x.jpg "Download block with 'Select a download...' in the sidebar")
 
 
 After selecting a download, the block shows the card (e.g. title, download link, description) in the editor.
 
+
+{% img aligncenter /uploads/2026/02/download-block.jpg 579 235 "Block editor: Download block showing a rendered card" "Block editor: Download block showing a rendered card" %}
 
 
 ![Block editor: Download block showing a rendered card](images/download-block@2x.jpg "Download block displaying a download card in the editor")
@@ -78,12 +92,16 @@ After selecting a download, the block shows the card (e.g. title, download link,
 You can also use the block toolbar to pick a download when the block is selected.
 
 
+{% img aligncenter /uploads/2026/02/download-select-block.jpg 356 212 "Block editor: Download block toolbar with Download option" "Block editor: Download block toolbar with Download option" %}
+
 
 ![Block editor: Download block toolbar with Download option](images/download-select-block@2x.jpg "Download block with Download/File options in the toolbar")
 
 
 Or start typing `/download` to select:
 
+
+{% img aligncenter /uploads/2026/02/download-select.jpg 596 285 "Block editor: Download block with /download" "Block editor: Download block with /download" %}
 
 
 ![Block editor: Download block with /download](images/download-select@2x.jpg "Download block with /download")
@@ -93,6 +111,8 @@ Or start typing `/download` to select:
 
 On the frontend, the shortcode (or block) renders a download card: title, download link, description, dates, and optional donate/info links, styled by your template and custom CSS.
 
+
+{% img aligncenter /uploads/2026/02/download-card.jpg 690 286 "Example download card on the frontend" "Example download card on the frontend" %}
 
 
 ![Example download card on the frontend](images/download-card@2x.jpg "Example download card with icon, title, link, description, and dates")
