@@ -1,0 +1,135 @@
+/* TinyMCE Insert download button icon - use dashicons (loaded in editor) */
+i.mce-i-btdl-download:before {
+  font: normal 20px/1 dashicons;
+  content: "\f316";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #50575e;
+}
+.mce-btn:hover i.mce-i-btdl-download:before,
+.mce-btn:focus i.mce-i-btdl-download:before {
+  color: #1d2327;
+}
+
+.btdl-download-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btdl-download-picker-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.btdl-download-picker-dialog {
+  position: relative;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  min-width: 320px;
+  max-width: 480px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btdl-download-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #c3c4c7;
+}
+
+.btdl-download-picker-header h2 {
+  margin: 0;
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.btdl-download-picker-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #50575e;
+  padding: 0 4px;
+}
+
+.btdl-download-picker-close:hover {
+  color: #1d2327;
+}
+
+.btdl-download-picker-body {
+  padding: 16px;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.btdl-download-picker-search-wrap {
+  margin-bottom: 12px;
+}
+
+.btdl-download-picker-search {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #8c8f94;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.btdl-download-picker-search:focus {
+  border-color: #2271b1;
+  box-shadow: 0 0 0 1px #2271b1;
+  outline: none;
+}
+
+.btdl-download-picker-loading {
+  margin: 0;
+  color: #646970;
+}
+
+.btdl-download-picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.btdl-download-picker-list li {
+  margin: 0 0 4px;
+  padding: 0;
+}
+
+.btdl-download-picker-list a {
+  display: block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #1d2327;
+  border-radius: 2px;
+}
+
+.btdl-download-picker-list a:hover {
+  background: #f0f0f1;
+  color: #2271b1;
+}
+
+.btdl-download-picker-list li.btdl-download-picker-highlight a,
+.btdl-download-picker-list li.btdl-download-picker-highlight a:hover {
+  background: #2271b1;
+  color: #fff;
+}
