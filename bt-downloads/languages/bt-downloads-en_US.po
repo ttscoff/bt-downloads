@@ -1,0 +1,185 @@
+# English (United States) translation for BT Downloads
+msgid ""
+msgstr ""
+"Project-Id-Version: BT Downloads 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/ttscoff/bt-downloads/\n"
+"POT-Creation-Date: 2025-02-03 00:00+0000\n"
+"PO-Revision-Date: 2025-02-03 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Downloads"
+msgstr "Downloads"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Add New"
+msgstr "Add New"
+
+msgid "Add New Download"
+msgstr "Add New Download"
+
+msgid "Edit Download"
+msgstr "Edit Download"
+
+msgid "New Download"
+msgstr "New Download"
+
+msgid "View Download"
+msgstr "View Download"
+
+msgid "Search Downloads"
+msgstr "Search Downloads"
+
+msgid "No downloads found."
+msgstr "No downloads found."
+
+msgid "No downloads found in Trash."
+msgstr "No downloads found in Trash."
+
+msgid "Download Details"
+msgstr "Download Details"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Card preview"
+msgstr "Card preview"
+
+msgid "Use this ID in the shortcode. Assigned automatically for new downloads."
+msgstr "Use this ID in the shortcode. Assigned automatically for new downloads."
+
+msgid "Publish or update to assign the next available ID for [download N]."
+msgstr "Publish or update to assign the next available ID for [download N]."
+
+msgid "How this download will look with the current card template."
+msgstr "How this download will look with the current card template."
+
+msgid "Preview with site theme"
+msgstr "Preview with site theme"
+
+msgid "File URL"
+msgstr "File URL"
+
+msgid "Upload / Select file"
+msgstr "Upload / Select file"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Info URL"
+msgstr "Info URL"
+
+msgid "Icon URL"
+msgstr "Icon URL"
+
+msgid "Upload / Select image"
+msgstr "Upload / Select image"
+
+msgid "Created date"
+msgstr "Created date"
+
+msgid "Set to current date/time"
+msgstr "Set to current date/time"
+
+msgid "Updated date"
+msgstr "Updated date"
+
+msgid "Changelog URL"
+msgstr "Changelog URL"
+
+msgid "Shortcode ID"
+msgstr "Shortcode ID"
+
+msgid "Download card template"
+msgstr "Download card template"
+
+msgid "Card template"
+msgstr "Card template"
+
+msgid "Settings saved."
+msgstr "Settings saved."
+
+msgid "HTML template"
+msgstr "HTML template"
+
+msgid "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+msgstr "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+
+msgid "Save template"
+msgstr "Save template"
+
+msgid "Reset to default template?"
+msgstr "Reset to default template?"
+
+msgid "Reset to default"
+msgstr "Reset to default"
+
+msgid "Custom CSS"
+msgstr "Custom CSS"
+
+msgid "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
+msgstr "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Preview updates as you type. Uses the current template and plugin styles."
+msgstr "Preview updates as you type. Uses the current template and plugin styles."
+
+msgid "Preview with your site theme (saved template):"
+msgstr "Preview with your site theme (saved template):"
+
+msgid "Open in new tab"
+msgstr "Open in new tab"
+
+msgid "Reload theme preview below"
+msgstr "Reload theme preview below"
+
+msgid "Card preview with theme"
+msgstr "Card preview with theme"
+
+msgid "Save all"
+msgstr "Save all"
+
+msgid "Clear custom CSS?"
+msgstr "Clear custom CSS?"
+
+msgid "Clear custom CSS"
+msgstr "Clear custom CSS"
+
+msgid "Download not found:"
+msgstr "Download not found:"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "Insert download"
+msgstr "Insert download"
+
+msgid "Loading downloads…"
+msgstr "Loading downloads…"
+
+msgid "Search downloads…"
+msgstr "Search downloads…"
+
+msgid "Insert a download card by selecting from your downloads."
+msgstr "Insert a download card by selecting from your downloads."
+
+msgid "Select a download…"
+msgstr "Select a download…"
+
+msgid "Select a download from the block settings in the sidebar."
+msgstr "Select a download from the block settings in the sidebar."
+
+msgid "Close"
+msgstr "Close"

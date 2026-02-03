@@ -1,0 +1,185 @@
+# Italian (Italy) translation for BT Downloads
+msgid ""
+msgstr ""
+"Project-Id-Version: BT Downloads 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/ttscoff/bt-downloads/\n"
+"POT-Creation-Date: 2025-02-03 00:00+0000\n"
+"PO-Revision-Date: 2025-02-03 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Italiano\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Downloads"
+msgstr "Download"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+msgid "Add New Download"
+msgstr "Aggiungi nuovo download"
+
+msgid "Edit Download"
+msgstr "Modifica download"
+
+msgid "New Download"
+msgstr "Nuovo download"
+
+msgid "View Download"
+msgstr "Visualizza download"
+
+msgid "Search Downloads"
+msgstr "Cerca download"
+
+msgid "No downloads found."
+msgstr "Nessun download trovato."
+
+msgid "No downloads found in Trash."
+msgstr "Nessun download nel cestino."
+
+msgid "Download Details"
+msgstr "Dettagli download"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Card preview"
+msgstr "Anteprima scheda"
+
+msgid "Use this ID in the shortcode. Assigned automatically for new downloads."
+msgstr "Usa questo ID nello shortcode. Assegnato automaticamente ai nuovi download."
+
+msgid "Publish or update to assign the next available ID for [download N]."
+msgstr "Pubblica o aggiorna per assegnare il prossimo ID disponibile per [download N]."
+
+msgid "How this download will look with the current card template."
+msgstr "Come apparirà questo download con il modello di scheda attuale."
+
+msgid "Preview with site theme"
+msgstr "Anteprima con il tema del sito"
+
+msgid "File URL"
+msgstr "URL file"
+
+msgid "Upload / Select file"
+msgstr "Carica / Seleziona file"
+
+msgid "Version"
+msgstr "Versione"
+
+msgid "Description"
+msgstr "Descrizione"
+
+msgid "Info URL"
+msgstr "URL informazioni"
+
+msgid "Icon URL"
+msgstr "URL icona"
+
+msgid "Upload / Select image"
+msgstr "Carica / Seleziona immagine"
+
+msgid "Created date"
+msgstr "Data di creazione"
+
+msgid "Set to current date/time"
+msgstr "Imposta data/ora attuale"
+
+msgid "Updated date"
+msgstr "Data di aggiornamento"
+
+msgid "Changelog URL"
+msgstr "URL changelog"
+
+msgid "Shortcode ID"
+msgstr "ID shortcode"
+
+msgid "Download card template"
+msgstr "Modello scheda download"
+
+msgid "Card template"
+msgstr "Modello scheda"
+
+msgid "Settings saved."
+msgstr "Impostazioni salvate."
+
+msgid "HTML template"
+msgstr "Modello HTML"
+
+msgid "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+msgstr "Modifica il modello HTML per le schede download. Usa {{variable}} per i valori. Usa {{#variable}}...{{/variable}} per mostrare un blocco solo quando la variabile è impostata. Disponibili: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+
+msgid "Save template"
+msgstr "Salva modello"
+
+msgid "Reset to default template?"
+msgstr "Ripristinare il modello predefinito?"
+
+msgid "Reset to default"
+msgstr "Ripristina predefiniti"
+
+msgid "Custom CSS"
+msgstr "CSS personalizzato"
+
+msgid "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
+msgstr "Aggiungi CSS personalizzato per stilizzare le schede download. Usa selettori come .btdl-download-card, .dl-icon-wrap, .dl-content, ecc."
+
+msgid "Preview"
+msgstr "Anteprima"
+
+msgid "Preview updates as you type. Uses the current template and plugin styles."
+msgstr "L’anteprima si aggiorna mentre digiti. Usa il modello e gli stili del plugin attuali."
+
+msgid "Preview with your site theme (saved template):"
+msgstr "Anteprima con il tema del sito (modello salvato):"
+
+msgid "Open in new tab"
+msgstr "Apri in nuova scheda"
+
+msgid "Reload theme preview below"
+msgstr "Ricarica anteprima tema sotto"
+
+msgid "Card preview with theme"
+msgstr "Anteprima scheda con tema"
+
+msgid "Save all"
+msgstr "Salva tutto"
+
+msgid "Clear custom CSS?"
+msgstr "Cancellare il CSS personalizzato?"
+
+msgid "Clear custom CSS"
+msgstr "Cancella CSS personalizzato"
+
+msgid "Download not found:"
+msgstr "Download non trovato:"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "Insert download"
+msgstr "Inserisci download"
+
+msgid "Loading downloads…"
+msgstr "Caricamento download…"
+
+msgid "Search downloads…"
+msgstr "Cerca download…"
+
+msgid "Insert a download card by selecting from your downloads."
+msgstr "Inserisci una scheda download selezionando tra i tuoi download."
+
+msgid "Select a download…"
+msgstr "Seleziona un download…"
+
+msgid "Select a download from the block settings in the sidebar."
+msgstr "Seleziona un download dalle impostazioni del blocco nella barra laterale."
+
+msgid "Close"
+msgstr "Chiudi"

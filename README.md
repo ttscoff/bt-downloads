@@ -3,12 +3,16 @@
 
 ## Features
 
+<!--JEKYLL>{% raw %}<!--END JEKYLL-->
+
 - **Custom post type** for downloads: file URL, version, description, info link, icon, changelog
 - **Editable HTML template** with Mustache-style conditionals (`{{#var}}...{{/var}}`)
 - **Custom CSS** with live-updating preview
 - **Upload buttons** for file and icon on the download edit screen (files go to `uploads/downloads/`)
 - **Insert tools** for classic editor (TinyMCE button) and block editor (Download block)
 - **WP-CLI import** from CSV: `wp btdl import_downloads --file=/path/to/downloads.csv`
+
+<!--JEKYLL>{% endraw %}<!--END JEKYLL-->
 
 ## Installation
 
@@ -47,8 +51,9 @@ When editing a download, you set the file URL, version, description, info URL, i
 
 ## Card template
 
+<!--JEKYLL>{% raw %}<!--JEKYLL-->
 Under **Downloads ??? Card template** you can edit the HTML template and custom CSS for download cards. The template uses variables such as `{{title_str}}`, `{{file}}`, `{{version}}`, `{{description}}`, and conditionals like `{{#description}}...{{/description}}`. A live preview updates as you type.
-
+<!--JEKYLL>{% endraw %}<!--END JEKYLL-->
 
 {% img aligncenter /uploads/2026/02/download-card-template-800.jpg 694 800 "Download card template and custom CSS with live preview" "Download card template and custom CSS with live preview" %}
 

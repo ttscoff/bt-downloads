@@ -23,6 +23,10 @@ require_once BTDL_PATH . 'includes/class-btdl-download-template.php';
 require_once BTDL_PATH . 'includes/class-btdl-download.php';
 require_once BTDL_PATH . 'includes/class-btdl-download-editor.php';
 
+add_action('init', function () {
+	load_plugin_textdomain('bt-downloads', false, dirname(plugin_basename(__FILE__)) . '/languages');
+});
+
 BTDL_Download_CPT::init();
 BTDL_Download_Editor::init();
 BTDL_Download::register_shortcode();

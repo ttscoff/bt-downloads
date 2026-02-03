@@ -1,0 +1,242 @@
+# Copyright (C) 2025 BT Downloads
+# This file is distributed under the same license as the BT Downloads package.
+msgid ""
+msgstr ""
+"Project-Id-Version: BT Downloads 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/ttscoff/bt-downloads/\n"
+"POT-Creation-Date: 2025-02-03 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: includes/class-btdl-download-cpt.php
+msgid "Downloads"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Download"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Add New"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Add New Download"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Edit Download"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "New Download"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "View Download"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Search Downloads"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "No downloads found."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "No downloads found in Trash."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Download Details"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Shortcode"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Card preview"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Use this ID in the shortcode. Assigned automatically for new downloads."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Publish or update to assign the next available ID for [download N]."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "How this download will look with the current card template."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Preview with site theme"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "File URL"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Upload / Select file"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Version"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Description"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Info URL"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Icon URL"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Upload / Select image"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Created date"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Set to current date/time"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Updated date"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Changelog URL"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Shortcode ID"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Download card template"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Card template"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Settings saved."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "HTML template"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Save template"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Reset to default template?"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Reset to default"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Preview"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Preview updates as you type. Uses the current template and plugin styles."
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Preview with your site theme (saved template):"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Open in new tab"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Reload theme preview below"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Card preview with theme"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Save all"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Clear custom CSS?"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php
+msgid "Clear custom CSS"
+msgstr ""
+
+#: includes/class-btdl-download.php
+msgid "Download not found:"
+msgstr ""
+
+#: includes/class-btdl-download.php
+msgid "Changelog"
+msgstr ""
+
+#: includes/class-btdl-download-editor.php admin/download-format.js
+msgid "Insert download"
+msgstr ""
+
+#: includes/class-btdl-download-editor.php
+msgid "Loading downloads…"
+msgstr ""
+
+#: includes/class-btdl-download-editor.php
+msgid "Search downloads…"
+msgstr ""
+
+#: includes/class-btdl-download-editor.php
+msgid "Insert a download card by selecting from your downloads."
+msgstr ""
+
+#: admin/download-block.js
+msgid "Select a download…"
+msgstr ""
+
+#: admin/download-block.js
+msgid "Select a download from the block settings in the sidebar."
+msgstr ""
+
+#: includes/class-btdl-download-editor.php
+msgid "Close"
+msgstr ""

@@ -1,0 +1,185 @@
+# German (Germany) translation for BT Downloads
+msgid ""
+msgstr ""
+"Project-Id-Version: BT Downloads 1.0.3\n"
+"Report-Msgid-Bugs-To: https://github.com/ttscoff/bt-downloads/\n"
+"POT-Creation-Date: 2025-02-03 00:00+0000\n"
+"PO-Revision-Date: 2025-02-03 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Downloads"
+msgstr "Downloads"
+
+msgid "Download"
+msgstr "Download"
+
+msgid "Add New"
+msgstr "Erstellen"
+
+msgid "Add New Download"
+msgstr "Neuen Download hinzufügen"
+
+msgid "Edit Download"
+msgstr "Download bearbeiten"
+
+msgid "New Download"
+msgstr "Neuer Download"
+
+msgid "View Download"
+msgstr "Download anzeigen"
+
+msgid "Search Downloads"
+msgstr "Downloads durchsuchen"
+
+msgid "No downloads found."
+msgstr "Keine Downloads gefunden."
+
+msgid "No downloads found in Trash."
+msgstr "Keine Downloads im Papierkorb gefunden."
+
+msgid "Download Details"
+msgstr "Download-Details"
+
+msgid "Shortcode"
+msgstr "Shortcode"
+
+msgid "Card preview"
+msgstr "Kartenvorschau"
+
+msgid "Use this ID in the shortcode. Assigned automatically for new downloads."
+msgstr "Diese ID im Shortcode verwenden. Wird bei neuen Downloads automatisch vergeben."
+
+msgid "Publish or update to assign the next available ID for [download N]."
+msgstr "Veröffentlichen oder aktualisieren, um die nächste verfügbare ID für [download N] zu vergeben."
+
+msgid "How this download will look with the current card template."
+msgstr "So wird dieser Download mit der aktuellen Kartenvorlage dargestellt."
+
+msgid "Preview with site theme"
+msgstr "Vorschau mit Website-Theme"
+
+msgid "File URL"
+msgstr "Datei-URL"
+
+msgid "Upload / Select file"
+msgstr "Hochladen / Datei auswählen"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Info URL"
+msgstr "Info-URL"
+
+msgid "Icon URL"
+msgstr "Symbol-URL"
+
+msgid "Upload / Select image"
+msgstr "Hochladen / Bild auswählen"
+
+msgid "Created date"
+msgstr "Erstellungsdatum"
+
+msgid "Set to current date/time"
+msgstr "Auf aktuelles Datum/Uhrzeit setzen"
+
+msgid "Updated date"
+msgstr "Aktualisierungsdatum"
+
+msgid "Changelog URL"
+msgstr "Changelog-URL"
+
+msgid "Shortcode ID"
+msgstr "Shortcode-ID"
+
+msgid "Download card template"
+msgstr "Download-Kartenvorlage"
+
+msgid "Card template"
+msgstr "Kartenvorlage"
+
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
+msgid "HTML template"
+msgstr "HTML-Vorlage"
+
+msgid "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+msgstr "HTML-Vorlage für Download-Karten bearbeiten. {{variable}} für Werte verwenden. {{#variable}}...{{/variable}} zeigt einen Block nur an, wenn die Variable gesetzt ist. Verfügbar: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
+
+msgid "Save template"
+msgstr "Vorlage speichern"
+
+msgid "Reset to default template?"
+msgstr "Auf Standardvorlage zurücksetzen?"
+
+msgid "Reset to default"
+msgstr "Auf Standard zurücksetzen"
+
+msgid "Custom CSS"
+msgstr "Eigenes CSS"
+
+msgid "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
+msgstr "Eigenes CSS hinzufügen, um die Download-Karten zu gestalten. Selektoren wie .btdl-download-card, .dl-icon-wrap, .dl-content usw. verwenden."
+
+msgid "Preview"
+msgstr "Vorschau"
+
+msgid "Preview updates as you type. Uses the current template and plugin styles."
+msgstr "Die Vorschau wird beim Tippen aktualisiert. Verwendet die aktuelle Vorlage und Plugin-Styles."
+
+msgid "Preview with your site theme (saved template):"
+msgstr "Vorschau mit Ihrem Website-Theme (gespeicherte Vorlage):"
+
+msgid "Open in new tab"
+msgstr "In neuem Tab öffnen"
+
+msgid "Reload theme preview below"
+msgstr "Theme-Vorschau unten neu laden"
+
+msgid "Card preview with theme"
+msgstr "Kartenvorschau mit Theme"
+
+msgid "Save all"
+msgstr "Alles speichern"
+
+msgid "Clear custom CSS?"
+msgstr "Eigenes CSS löschen?"
+
+msgid "Clear custom CSS"
+msgstr "Eigenes CSS löschen"
+
+msgid "Download not found:"
+msgstr "Download nicht gefunden:"
+
+msgid "Changelog"
+msgstr "Changelog"
+
+msgid "Insert download"
+msgstr "Download einfügen"
+
+msgid "Loading downloads…"
+msgstr "Downloads werden geladen…"
+
+msgid "Search downloads…"
+msgstr "Downloads durchsuchen…"
+
+msgid "Insert a download card by selecting from your downloads."
+msgstr "Eine Download-Karte einfügen, indem Sie aus Ihren Downloads wählen."
+
+msgid "Select a download…"
+msgstr "Download auswählen…"
+
+msgid "Select a download from the block settings in the sidebar."
+msgstr "Wählen Sie einen Download in den Blockeinstellungen in der Seitenleiste."
+
+msgid "Close"
+msgstr "Schließen"

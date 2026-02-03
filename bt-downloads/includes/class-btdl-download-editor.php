@@ -203,6 +203,8 @@ class BTDL_Download_Editor
 			BTDL_VERSION,
 			true
 		);
+		wp_set_script_translations('btdl-download-block', 'bt-downloads', BTDL_PATH . 'languages');
+		wp_set_script_translations('btdl-download-format', 'bt-downloads', BTDL_PATH . 'languages');
 		wp_localize_script(
 			'btdl-download-block',
 			'btdlDownloadPicker',
