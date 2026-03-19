@@ -1,6 +1,6 @@
 # BT Downloads
 
-Download cards with editable HTML template and custom CSS. Use the `[download ID]` shortcode anywhere shortcodes are supported, or insert download cards via the classic and block editors.
+Download cards with editable HTML template and custom CSS. Use the `[btdl_download ID]` shortcode anywhere shortcodes are supported, or insert download cards via the classic and block editors.
 
 <!--README-->
 **Requires:** WordPress 5.8+, PHP 7.4+
@@ -31,7 +31,7 @@ The plugin adds a **Downloads** item to the WordPress admin menu with sub-items:
 ![Downloads menu in the WordPress admin sidebar](images/downloads-sidebar@2x.jpg "Downloads menu with submenu: Downloads, Add New Download, Card template")
 <!-- END WP-->
 
-The main **Downloads** screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in `[download ID]` to embed a card.
+The main **Downloads** screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in `[btdl_download ID]` to embed a card.
 
 <!--JEKYLL-->
 {% img aligncenter /uploads/2026/02/downloads-800.jpg 800 310 "Downloads list in the WordPress admin" "Downloads list in the WordPress admin" %}
@@ -40,7 +40,7 @@ The main **Downloads** screen lists all download entries with title, shortcode I
 ![Downloads list in the WordPress admin](images/downloads-800@2x.jpg "Downloads list with title, shortcode ID, version, and date")
 <!--END WP-->
 
-When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The **Shortcode** meta box shows the exact shortcode (e.g. `[download 128]`) to use in posts or pages.
+When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The **Shortcode** meta box shows the exact shortcode (e.g. `[btdl_download 128]`) to use in posts or pages.
 
 <!--JEKYLL-->
 {% img aligncenter /uploads/2026/02/download-edit-800.jpg 800 522 "Edit Download screen with file, version, description, and shortcode" "Edit Download screen with file, version, description, and shortcode" %}
@@ -124,7 +124,7 @@ On the frontend, the shortcode (or block) renders a download card: title, downlo
 
 ## Shortcode
 
-Use `[download 27]` where `27` is the shortcode ID of the download (shown in the Downloads list and on the edit screen).
+Use `[btdl_download 27]` where `27` is the shortcode ID of the download (shown in the Downloads list and on the edit screen).
 
 ## WP-CLI
 
