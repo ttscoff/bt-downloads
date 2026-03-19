@@ -16,6 +16,7 @@
   var picker = window.btdlDownloadPicker || {};
   var restUrl = picker.restUrl || "";
   var nonce = picker.nonce || "";
+  var shortcodeTag = picker.shortcodeTag || "btdl_download";
 
   function matchesFilter(item, q) {
     if (!q) return true;
@@ -161,7 +162,7 @@
   }
 
   function selectItem(id) {
-    var shortcode = "[download " + id + "]";
+    var shortcode = "[" + shortcodeTag + " " + id + "]";
     if (typeof callback === "function") callback(shortcode);
     closeModal();
   }

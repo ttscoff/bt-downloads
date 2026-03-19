@@ -8,11 +8,11 @@ Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Download cards with editable HTML template and custom CSS. Shortcode [download] for insertable download cards.
+Download cards with editable HTML template and custom CSS. Shortcode [btdl_download] for insertable download cards.
 
 == Description ==
 
-BT Downloads provides a custom post type for managing downloadable projects with an editable card template, custom CSS with live preview, and insert tools for both the classic and block editors. Use the `[download ID]` shortcode anywhere shortcodes are supported.
+BT Downloads provides a custom post type for managing downloadable projects with an editable card template, custom CSS with live preview, and insert tools for both the classic and block editors. Use the `[btdl_download ID]` shortcode anywhere shortcodes are supported.
 
 = Features =
 * Custom post type for downloads with file URL, version, description, info link, icon, and changelog
@@ -23,7 +23,7 @@ BT Downloads provides a custom post type for managing downloadable projects with
 * WP-CLI import from CSV: `wp btdl import_downloads --file=/path/to/downloads.csv`
 
 = Shortcode =
-Use `[download 27]` where 27 is the shortcode ID assigned to the download.
+Use `[btdl_download 27]` where 27 is the shortcode ID assigned to the download.
 
 = Accessing Downloads in the admin =
 In the WordPress admin sidebar, click **Downloads**. You get three sub-items: **Downloads** (list of all download entries, with shortcode IDs), **Add New Download**, and **Card template** (editable HTML template and custom CSS for the download cards). Use the list to edit or add downloads; use Card template to change how cards look on the front end.

@@ -231,10 +231,25 @@ class BTDL_Download_Template
 		}
 		wp_register_style('btdl-download-card', false, array(), BTDL_VERSION);
 		wp_enqueue_style('btdl-download-card');
-		$default = self::get_default_css();
-		$custom = trim(self::get_custom_css());
+		$default = self::sanitize_css_for_output(self::get_default_css());
+		$custom = self::sanitize_css_for_output(trim(self::get_custom_css()));
 		$inline = $default . ($custom !== '' ? "\n\n/* Custom CSS */\n" . $custom : '');
 		wp_add_inline_style('btdl-download-card', $inline);
+	}
+
+	/**
+	 * Sanitize CSS before output into style tags.
+	 *
+	 * @param string $css CSS string.
+	 * @return string
+	 */
+	public static function sanitize_css_for_output($css)
+	{
+		$css = (string) $css;
+		$css = wp_kses_no_null($css);
+		$css = preg_replace('#</?style[^>]*>#i', '', $css);
+		$css = str_ireplace(array('</style', '<style', '</script', '<script', '<!--', '-->'), '', $css);
+		return trim($css);
 	}
 
 	/**

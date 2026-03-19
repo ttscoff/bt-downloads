@@ -1,6 +1,6 @@
 /**
  * Block editor format: Insert download. Adds "Download" to the format toolbar dropdown.
- * When clicked, opens the picker modal; on select, inserts [download ID] at cursor.
+ * When clicked, opens the picker modal; on select, inserts [btdl_download ID] at cursor.
  */
 (function (richText, blockEditor, element, i18n) {
   "use strict";

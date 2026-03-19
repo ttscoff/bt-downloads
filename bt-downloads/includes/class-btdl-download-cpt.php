@@ -1,7 +1,7 @@
 <?php
 /**
  * Registers the Download custom post type and meta boxes.
- * Shortcode [download ID] uses _btdl_id meta. Uses btdl_ prefix for uniqueness.
+ * Shortcode [btdl_download ID] uses _btdl_id meta. Uses btdl_ prefix for uniqueness.
  *
  * @package BT_Downloads
  */
@@ -119,11 +119,12 @@ class BTDL_Download_CPT
 	public static function render_shortcode_box($post)
 	{
 		$id = get_post_meta($post->ID, self::META_ID, true);
+		$shortcode_tag = BTDL_Download::get_shortcode_tag();
 		if ($id !== '') {
-			echo '<p><code>[download ' . esc_html($id) . ']</code></p>';
+			echo '<p><code>[' . esc_html($shortcode_tag) . ' ' . esc_html($id) . ']</code></p>';
 			echo '<p class="description">' . esc_html__('Use this ID in the shortcode. Assigned automatically for new downloads.', 'bt-downloads') . '</p>';
 		} else {
-			echo '<p class="description">' . esc_html__('Publish or update to assign the next available ID for [download N].', 'bt-downloads') . '</p>';
+			echo '<p class="description">' . esc_html__('Publish or update to assign the next available ID for [btdl_download N].', 'bt-downloads') . '</p>';
 		}
 	}
 
@@ -396,17 +397,37 @@ class BTDL_Download_CPT
 	public static function admin_enqueue_scripts($hook)
 	{
 		$screen = get_current_screen();
-		if (!$screen || $screen->id !== self::POST_TYPE || $screen->base !== 'post') {
+		if (!$screen) {
 			return;
 		}
-		wp_enqueue_media();
-		wp_enqueue_script(
-			'btdl-download-admin',
-			BTDL_URL . 'admin/download-edit.js',
-			array('jquery'),
-			BTDL_VERSION,
-			true
-		);
+		if ($screen->id === self::POST_TYPE && $screen->base === 'post') {
+			wp_enqueue_media();
+			wp_enqueue_script(
+				'btdl-download-admin',
+				BTDL_URL . 'admin/download-edit.js',
+				array('jquery'),
+				BTDL_VERSION,
+				true
+			);
+			return;
+		}
+		if ($screen->id === self::POST_TYPE . '_page_btdl-download-template') {
+			wp_enqueue_script(
+				'btdl-template-editor',
+				BTDL_URL . 'admin/download-template-editor.js',
+				array(),
+				BTDL_VERSION,
+				true
+			);
+			wp_localize_script(
+				'btdl-template-editor',
+				'btdlTemplateEditor',
+				array(
+					'ajaxUrl' => admin_url('admin-ajax.php'),
+					'nonce' => wp_create_nonce('btdl_card_preview'),
+				)
+			);
+		}
 	}
 
 	/**
@@ -520,7 +541,7 @@ class BTDL_Download_CPT
 		}
 		$custom_css = trim($custom_css);
 		$default_css = BTDL_Download_Template::get_default_css();
-		$css = $default_css . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : '');
+		$css = BTDL_Download_Template::sanitize_css_for_output($default_css . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : ''));
 		$data = BTDL_Download_Template::get_preview_sample_data();
 		$card_html = BTDL_Download_Template::render($template, $data);
 		$doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' . $css . '</style></head><body style="margin:12px;">' . $card_html . '</body></html>';
@@ -540,7 +561,7 @@ class BTDL_Download_CPT
 		}
 		$template = BTDL_Download_Template::get_template();
 		$custom_css = trim(BTDL_Download_Template::get_custom_css());
-		$css = BTDL_Download_Template::get_default_css() . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : '');
+		$css = BTDL_Download_Template::sanitize_css_for_output(BTDL_Download_Template::get_default_css() . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : ''));
 		$download_id = (int) get_query_var('btdl_download_id');
 		if ($download_id > 0) {
 			$post = get_post($download_id);
@@ -555,6 +576,9 @@ class BTDL_Download_CPT
 		}
 		$card_html = BTDL_Download_Template::render($template, $data);
 		wp_enqueue_style('btdl-preview-theme', get_stylesheet_uri(), array(), null);
+		wp_register_style('btdl-card-preview', false, array('btdl-preview-theme'), BTDL_VERSION);
+		wp_enqueue_style('btdl-card-preview');
+		wp_add_inline_style('btdl-card-preview', $css);
 		ob_start();
 		?>
 		<!DOCTYPE html>
@@ -564,9 +588,6 @@ class BTDL_Download_CPT
 			<meta charset="<?php bloginfo('charset'); ?>">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<?php wp_head(); ?>
-			<style id="btdl-card-preview-css">
-				<?php echo str_replace('</style>', '', wp_strip_all_tags($css)); ?>
-			</style>
 		</head>
 
 		<body class="btdl-preview-body" style="margin: 1rem; padding: 0;">
@@ -668,54 +689,6 @@ class BTDL_Download_CPT
 				</p>
 			</form>
 
-			<script>
-				(function () {
-					var templateTextarea = document.getElementById('btdl_template');
-					var cssTextarea = document.getElementById('btdl_custom_css');
-					var iframe = document.getElementById('btdl_css_preview');
-					var themeIframe = document.getElementById('btdl_theme_preview');
-					var themeReloadBtn = document.getElementById('btdl_preview_theme_reload');
-					var timeout;
-					var previewUrl = <?php echo wp_json_encode(admin_url('admin-ajax.php')); ?>;
-
-					function buildPreview() {
-						if (!iframe) return;
-						var template = templateTextarea ? templateTextarea.value : '';
-						var customCss = cssTextarea ? cssTextarea.value : '';
-						var formData = new FormData();
-						formData.append('action', 'btdl_card_preview');
-						formData.append('nonce', <?php echo wp_json_encode(wp_create_nonce('btdl_card_preview')); ?>);
-						if (template) formData.append('btdl_template', template);
-						if (customCss) formData.append('btdl_custom_css', customCss);
-						fetch(previewUrl, { method: 'POST', body: formData, credentials: 'same-origin' })
-							.then(function (r) { return r.json(); })
-							.then(function (data) {
-								if (data.success && data.data && data.data.html) {
-									iframe.srcdoc = data.data.html;
-								}
-							})
-							.catch(function () { iframe.srcdoc = ''; });
-					}
-					function debouncedPreview() {
-						clearTimeout(timeout);
-						timeout = setTimeout(buildPreview, 300);
-					}
-					buildPreview();
-					if (templateTextarea) {
-						templateTextarea.addEventListener('input', debouncedPreview);
-						templateTextarea.addEventListener('change', buildPreview);
-					}
-					if (cssTextarea) {
-						cssTextarea.addEventListener('input', debouncedPreview);
-						cssTextarea.addEventListener('change', buildPreview);
-					}
-					if (themeReloadBtn && themeIframe) {
-						themeReloadBtn.addEventListener('click', function () {
-							themeIframe.src = themeIframe.src;
-						});
-					}
-				})();
-			</script>
 		</div>
 		<?php
 	}

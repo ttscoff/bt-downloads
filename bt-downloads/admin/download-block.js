@@ -1,5 +1,5 @@
 /**
- * Block: Download. Renders [download ID]. Editor shows a dropdown to pick a download.
+ * Block: Download. Renders [btdl_download ID]. Editor shows a dropdown to pick a download.
  */
 (function (blocks, element, blockEditor, components, i18n) {
   "use strict";
@@ -14,6 +14,7 @@
 
   var picker = window.btdlDownloadPicker || {};
   var list = picker.list || [];
+  var shortcodeTag = picker.shortcodeTag || "btdl_download";
 
   var downloadSvg = createElement(
     "svg",
@@ -105,7 +106,7 @@
         createElement(
           Placeholder,
           { icon: downloadSvg, label: __("Download", "bt-downloads") },
-          "[download " + downloadId + "]"
+          "[" + shortcodeTag + " " + downloadId + "]"
         )
       );
     },

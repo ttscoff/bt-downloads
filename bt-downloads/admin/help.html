@@ -17,9 +17,9 @@
 <h2 id="admin">Admin</h2>
 <p>The plugin adds a <strong>Downloads</strong> item to the WordPress admin menu with sub-items: <strong>Downloads</strong>, <strong>Add New Download</strong>, and <strong>Card template</strong>.</p>
 <p>![Downloads menu in the WordPress admin <a href="images/downloads-sidebar@2x.jpg%5D(mailto:sidebar%5D(images/downloads-sidebar@2x.jpg)" title="Downloads menu with submenu: Downloads, Add New Download, Card template">sidebar</a></p>
-<p>The main <strong>Downloads</strong> screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in <code>[download ID]</code> to embed a card.</p>
+<p>The main <strong>Downloads</strong> screen lists all download entries with title, shortcode ID, version, and date. Use the shortcode ID in <code>[btdl_download ID]</code> to embed a card.</p>
 <p>![Downloads list in the WordPress <a href="images/downloads-800@2x.jpg%5D(mailto:admin%5D(images/downloads-800@2x.jpg)" title="Downloads list with title, shortcode ID, version, and date">admin</a></p>
-<p>When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The <strong>Shortcode</strong> meta box shows the exact shortcode (e.g. <code>[download 128]</code>) to use in posts or pages.</p>
+<p>When editing a download, you set the file URL, version, description, info URL, icon, dates, and changelog. The <strong>Shortcode</strong> meta box shows the exact shortcode (e.g. <code>[btdl_download 128]</code>) to use in posts or pages.</p>
 <p>![Edit Download screen with file, version, description, and <a href="images/download-edit-800@2x.jpg%5D(mailto:shortcode%5D(images/download-edit-800@2x.jpg)" title="Edit Download screen with Download Details and Shortcode meta box">shortcode</a></p>
 <h2 id="card-template">Card template</h2>
 <p>Under <strong>Downloads → Card template</strong> you can edit the HTML template and custom CSS for download cards. The template uses variables such as <code>{{title_str}}</code>, <code>{{file}}</code>, <code>{{version}}</code>, <code>{{description}}</code>, and conditionals like <code>{{#description}}...{{/description}}</code>. A live preview updates as you type.</p>
@@ -41,7 +41,7 @@
 <p>On the frontend, the shortcode (or block) renders a download card: title, download link, description, dates, and optional donate/info links, styled by your template and custom CSS.</p>
 <p>![Example download card on the <a href="images/download-card@2x.jpg%5D(mailto:frontend%5D(images/download-card@2x.jpg)" title="Example download card with icon, title, link, description, and dates">frontend</a></p>
 <h2 id="shortcode">Shortcode</h2>
-<p>Use <code>[download 27]</code> where <code>27</code> is the shortcode ID of the download (shown in the Downloads list and on the edit screen).</p>
+<p>Use <code>[btdl_download 27]</code> where <code>27</code> is the shortcode ID of the download (shown in the Downloads list and on the edit screen).</p>
 <h2 id="wp-cli">WP-CLI</h2>
 <p>Import downloads from a CSV:</p>
 <pre lang="bash"><code>wp btdl import_downloads --file=/path/to/downloads.csv

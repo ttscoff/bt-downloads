@@ -1,185 +1,282 @@
-# Italian (Italy) translation for BT Downloads
 msgid ""
 msgstr ""
 "Project-Id-Version: BT Downloads 1.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ttscoff/bt-downloads/\n"
-"POT-Creation-Date: 2025-02-03 00:00+0000\n"
-"PO-Revision-Date: 2025-02-03 00:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Italiano\n"
-"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-03 00:00+0000\n"
+"PO-Revision-Date: 2025-02-03 00:00+0000\n"
+"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: includes/class-btdl-download-cpt.php:55
+#: includes/class-btdl-download-cpt.php:65
 msgid "Downloads"
 msgstr "Download"
 
+#: includes/class-btdl-download-cpt.php:56
+#: includes/class-btdl-download-editor.php:230
+#: admin/download-block.js:46
+#: admin/download-block.js:62
+#: admin/download-block.js:74
+#: admin/download-block.js:85
+#: admin/download-block.js:108
+#: admin/download-format.js:57
 msgid "Download"
 msgstr "Download"
 
+#: includes/class-btdl-download-cpt.php:57
 msgid "Add New"
 msgstr "Aggiungi nuovo"
 
+#: includes/class-btdl-download-cpt.php:58
 msgid "Add New Download"
 msgstr "Aggiungi nuovo download"
 
+#: includes/class-btdl-download-cpt.php:59
 msgid "Edit Download"
 msgstr "Modifica download"
 
+#: includes/class-btdl-download-cpt.php:60
 msgid "New Download"
 msgstr "Nuovo download"
 
+#: includes/class-btdl-download-cpt.php:61
 msgid "View Download"
 msgstr "Visualizza download"
 
+#: includes/class-btdl-download-cpt.php:62
 msgid "Search Downloads"
 msgstr "Cerca download"
 
+#: includes/class-btdl-download-cpt.php:63
 msgid "No downloads found."
 msgstr "Nessun download trovato."
 
+#: includes/class-btdl-download-cpt.php:64
 msgid "No downloads found in Trash."
 msgstr "Nessun download nel cestino."
 
+#: includes/class-btdl-download-cpt.php:91
 msgid "Download Details"
 msgstr "Dettagli download"
 
+#: includes/class-btdl-download-cpt.php:99
 msgid "Shortcode"
 msgstr "Shortcode"
 
+#: includes/class-btdl-download-cpt.php:106
+#: includes/class-btdl-download-cpt.php:145
+#: includes/class-btdl-download-cpt.php:663
 msgid "Card preview"
 msgstr "Anteprima scheda"
 
+#: includes/class-btdl-download-cpt.php:125
 msgid "Use this ID in the shortcode. Assigned automatically for new downloads."
 msgstr "Usa questo ID nello shortcode. Assegnato automaticamente ai nuovi download."
 
-msgid "Publish or update to assign the next available ID for [download N]."
-msgstr "Pubblica o aggiorna per assegnare il prossimo ID disponibile per [download N]."
-
+#: includes/class-btdl-download-cpt.php:141
 msgid "How this download will look with the current card template."
 msgstr "Come apparirà questo download con il modello di scheda attuale."
 
+#: includes/class-btdl-download-cpt.php:151
 msgid "Preview with site theme"
 msgstr "Anteprima con il tema del sito"
 
+#: includes/class-btdl-download-cpt.php:177
 msgid "File URL"
 msgstr "URL file"
 
+#: includes/class-btdl-download-cpt.php:182
 msgid "Upload / Select file"
 msgstr "Carica / Seleziona file"
 
+#: includes/class-btdl-download-cpt.php:186
+#: includes/class-btdl-download-cpt.php:337
 msgid "Version"
 msgstr "Versione"
 
+#: includes/class-btdl-download-cpt.php:191
 msgid "Description"
 msgstr "Descrizione"
 
+#: includes/class-btdl-download-cpt.php:196
 msgid "Info URL"
 msgstr "URL informazioni"
 
+#: includes/class-btdl-download-cpt.php:201
 msgid "Icon URL"
 msgstr "URL icona"
 
+#: includes/class-btdl-download-cpt.php:206
 msgid "Upload / Select image"
 msgstr "Carica / Seleziona immagine"
 
+#: includes/class-btdl-download-cpt.php:210
 msgid "Created date"
 msgstr "Data di creazione"
 
+#: includes/class-btdl-download-cpt.php:217
+#: includes/class-btdl-download-cpt.php:229
 msgid "Set to current date/time"
 msgstr "Imposta data/ora attuale"
 
+#: includes/class-btdl-download-cpt.php:222
 msgid "Updated date"
 msgstr "Data di aggiornamento"
 
+#: includes/class-btdl-download-cpt.php:234
 msgid "Changelog URL"
 msgstr "URL changelog"
 
+#: includes/class-btdl-download-cpt.php:336
 msgid "Shortcode ID"
 msgstr "ID shortcode"
 
+#: includes/class-btdl-download-cpt.php:458
+#: includes/class-btdl-download-cpt.php:615
 msgid "Download card template"
 msgstr "Modello scheda download"
 
+#: includes/class-btdl-download-cpt.php:459
 msgid "Card template"
 msgstr "Modello scheda"
 
+#: includes/class-btdl-download-cpt.php:618
 msgid "Settings saved."
 msgstr "Impostazioni salvate."
 
+#: includes/class-btdl-download-cpt.php:625
 msgid "HTML template"
 msgstr "Modello HTML"
 
+#: includes/class-btdl-download-cpt.php:627
 msgid "Edit the HTML template for download cards. Use {{variable}} for values. Use {{#variable}}...{{/variable}} to show a block only when the variable is set. Available: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
 msgstr "Modifica il modello HTML per le schede download. Usa {{variable}} per i valori. Usa {{#variable}}...{{/variable}} per mostrare un blocco solo quando la variabile è impostata. Disponibili: title, title_str, file, version, description, info, icon_style, created_formatted, updated_formatted, changelog_url, changelog_link, donate_url."
 
+#: includes/class-btdl-download-cpt.php:637
 msgid "Save template"
 msgstr "Salva modello"
 
+#: includes/class-btdl-download-cpt.php:639
 msgid "Reset to default template?"
 msgstr "Ripristinare il modello predefinito?"
 
+#: includes/class-btdl-download-cpt.php:639
 msgid "Reset to default"
 msgstr "Ripristina predefiniti"
 
+#: includes/class-btdl-download-cpt.php:644
 msgid "Custom CSS"
 msgstr "CSS personalizzato"
 
+#: includes/class-btdl-download-cpt.php:646
 msgid "Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc."
 msgstr "Aggiungi CSS personalizzato per stilizzare le schede download. Usa selettori come .btdl-download-card, .dl-icon-wrap, .dl-content, ecc."
 
+#: includes/class-btdl-download-cpt.php:657
 msgid "Preview"
 msgstr "Anteprima"
 
+#: includes/class-btdl-download-cpt.php:659
 msgid "Preview updates as you type. Uses the current template and plugin styles."
 msgstr "L’anteprima si aggiorna mentre digiti. Usa il modello e gli stili del plugin attuali."
 
+#: includes/class-btdl-download-cpt.php:667
 msgid "Preview with your site theme (saved template):"
 msgstr "Anteprima con il tema del sito (modello salvato):"
 
+#: includes/class-btdl-download-cpt.php:669
 msgid "Open in new tab"
 msgstr "Apri in nuova scheda"
 
+#: includes/class-btdl-download-cpt.php:672
 msgid "Reload theme preview below"
 msgstr "Ricarica anteprima tema sotto"
 
+#: includes/class-btdl-download-cpt.php:677
 msgid "Card preview with theme"
 msgstr "Anteprima scheda con tema"
 
+#: includes/class-btdl-download-cpt.php:686
 msgid "Save all"
 msgstr "Salva tutto"
 
+#: includes/class-btdl-download-cpt.php:688
 msgid "Clear custom CSS?"
 msgstr "Cancellare il CSS personalizzato?"
 
+#: includes/class-btdl-download-cpt.php:688
 msgid "Clear custom CSS"
 msgstr "Cancella CSS personalizzato"
 
+#: includes/class-btdl-download.php:90
 msgid "Download not found:"
 msgstr "Download non trovato:"
 
+#: includes/class-btdl-download.php:147
 msgid "Changelog"
 msgstr "Changelog"
 
+#: includes/class-btdl-download-editor.php:153
+#: includes/class-btdl-download-editor.php:155
+#: admin/download-format.js:49
 msgid "Insert download"
 msgstr "Inserisci download"
 
+#: includes/class-btdl-download-editor.php:160
 msgid "Loading downloads…"
 msgstr "Caricamento download…"
 
+#: includes/class-btdl-download-editor.php:163
 msgid "Search downloads…"
 msgstr "Cerca download…"
 
+#: includes/class-btdl-download-editor.php:231
+#: admin/download-block.js:47
 msgid "Insert a download card by selecting from your downloads."
 msgstr "Inserisci una scheda download selezionando tra i tuoi download."
 
+#: admin/download-block.js:34
 msgid "Select a download…"
 msgstr "Seleziona un download…"
 
+#: admin/download-block.js:89
 msgid "Select a download from the block settings in the sidebar."
 msgstr "Seleziona un download dalle impostazioni del blocco nella barra laterale."
 
+#: includes/class-btdl-download-editor.php:157
 msgid "Close"
 msgstr "Chiudi"
+
+#. Plugin Name of the plugin
+#: bt-downloads.php
+msgid "BT Downloads"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: bt-downloads.php
+msgid "https://github.com/ttscoff/bt-downloads/"
+msgstr ""
+
+#. Description of the plugin
+#: bt-downloads.php
+msgid "Download cards with editable template and custom CSS. Shortcode [btdl_download] for insertable download cards."
+msgstr ""
+
+#. Author of the plugin
+#: bt-downloads.php
+msgid "Brett Terpstra"
+msgstr ""
+
+#. Author URI of the plugin
+#: bt-downloads.php
+msgid "https://brettterpstra.com"
+msgstr ""
+
+#: includes/class-btdl-download-cpt.php:127
+msgid "Publish or update to assign the next available ID for [btdl_download N]."
+msgstr ""

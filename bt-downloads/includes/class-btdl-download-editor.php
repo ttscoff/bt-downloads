@@ -102,6 +102,7 @@ class BTDL_Download_Editor
 			array(
 				'restUrl' => rest_url('btdl/v1/downloads'),
 				'nonce' => wp_create_nonce('wp_rest'),
+				'shortcodeTag' => BTDL_Download::get_shortcode_tag(),
 			)
 		);
 		wp_enqueue_style(
@@ -212,6 +213,7 @@ class BTDL_Download_Editor
 				'restUrl' => rest_url('btdl/v1/downloads'),
 				'nonce' => wp_create_nonce('wp_rest'),
 				'list' => $list,
+				'shortcodeTag' => BTDL_Download::get_shortcode_tag(),
 			)
 		);
 	}
@@ -253,6 +255,6 @@ class BTDL_Download_Editor
 		if ($id === '') {
 			return '';
 		}
-		return do_shortcode('[download ' . esc_attr($id) . ']');
+		return do_shortcode('[' . BTDL_Download::get_shortcode_tag() . ' ' . esc_attr($id) . ']');
 	}
 }

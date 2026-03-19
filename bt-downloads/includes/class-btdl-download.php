@@ -14,14 +14,26 @@ if (!defined('ABSPATH')) {
  */
 class BTDL_Download
 {
+	const SHORTCODE_TAG = 'btdl_download';
+	const SHORTCODE_ALIAS = 'btdl';
 
 	/**
 	 * Register shortcode(s).
 	 */
 	public static function register_shortcode()
 	{
-		add_shortcode('download', array(__CLASS__, 'shortcode'));
-		add_shortcode('btdl', array(__CLASS__, 'shortcode'));
+		add_shortcode(self::SHORTCODE_TAG, array(__CLASS__, 'shortcode'));
+		add_shortcode(self::SHORTCODE_ALIAS, array(__CLASS__, 'shortcode'));
+	}
+
+	/**
+	 * Get primary shortcode tag.
+	 *
+	 * @return string
+	 */
+	public static function get_shortcode_tag()
+	{
+		return self::SHORTCODE_TAG;
 	}
 
 	/**
