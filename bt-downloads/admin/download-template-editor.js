@@ -2,7 +2,7 @@
   "use strict";
 
   var templateTextarea = document.getElementById("btdl_template");
-  var cssTextarea = document.getElementById("btdl_custom_css");
+  var stylePresetSelect = document.getElementById("btdl_style_preset");
   var iframe = document.getElementById("btdl_css_preview");
   var themeIframe = document.getElementById("btdl_theme_preview");
   var themeReloadBtn = document.getElementById("btdl_preview_theme_reload");
@@ -15,12 +15,12 @@
   function buildPreview() {
     if (!iframe || !previewUrl || !nonce) return;
     var template = templateTextarea ? templateTextarea.value : "";
-    var customCss = cssTextarea ? cssTextarea.value : "";
+    var stylePreset = stylePresetSelect ? stylePresetSelect.value : "";
     var formData = new FormData();
     formData.append("action", "btdl_card_preview");
     formData.append("nonce", nonce);
     if (template) formData.append("btdl_template", template);
-    if (customCss) formData.append("btdl_custom_css", customCss);
+    if (stylePreset) formData.append("btdl_style_preset", stylePreset);
     fetch(previewUrl, { method: "POST", body: formData, credentials: "same-origin" })
       .then(function (response) {
         return response.json();
@@ -46,9 +46,8 @@
     templateTextarea.addEventListener("input", debouncedPreview);
     templateTextarea.addEventListener("change", buildPreview);
   }
-  if (cssTextarea) {
-    cssTextarea.addEventListener("input", debouncedPreview);
-    cssTextarea.addEventListener("change", buildPreview);
+  if (stylePresetSelect) {
+    stylePresetSelect.addEventListener("change", buildPreview);
   }
   if (themeReloadBtn && themeIframe) {
     themeReloadBtn.addEventListener("click", function () {

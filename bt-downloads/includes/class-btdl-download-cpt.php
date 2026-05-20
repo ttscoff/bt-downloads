@@ -484,11 +484,6 @@ class BTDL_Download_CPT
 			wp_safe_redirect(add_query_arg('updated', '1', wp_get_referer()));
 			exit;
 		}
-		if (isset($_POST['btdl_css_reset']) && sanitize_text_field(wp_unslash($_POST['btdl_css_reset'])) === '1') {
-			delete_option(BTDL_Download_Template::OPTION_CSS_KEY);
-			wp_safe_redirect(add_query_arg('updated', '1', wp_get_referer()));
-			exit;
-		}
 		$saved = false;
 		if (isset($_POST['btdl_template'])) {
 			$template = wp_unslash($_POST['btdl_template']);
@@ -499,10 +494,11 @@ class BTDL_Download_CPT
 			BTDL_Download_Template::save_template($template);
 			$saved = true;
 		}
-		if (isset($_POST['btdl_custom_css'])) {
-			// CSS: strip tags but preserve CSS content
-			$css = wp_strip_all_tags(wp_unslash($_POST['btdl_custom_css']));
-			BTDL_Download_Template::save_custom_css($css);
+		if (isset($_POST['btdl_style_preset'])) {
+			$preset = sanitize_text_field(wp_unslash($_POST['btdl_style_preset']));
+			BTDL_Download_Template::save_style_preset($preset);
+			// Remove legacy custom CSS option; custom CSS now lives in theme Additional CSS.
+			delete_option('btdl_card_css');
 			$saved = true;
 		}
 		if ($saved) {
@@ -535,13 +531,13 @@ class BTDL_Download_CPT
 			wp_send_json_error('Invalid nonce', 403);
 		}
 		$template = isset($_POST['btdl_template']) ? wp_unslash($_POST['btdl_template']) : '';
-		$custom_css = isset($_POST['btdl_custom_css']) ? wp_unslash($_POST['btdl_custom_css']) : '';
+		$preset = isset($_POST['btdl_style_preset']) ? sanitize_text_field(wp_unslash($_POST['btdl_style_preset'])) : BTDL_Download_Template::get_style_preset();
 		if ($template === '') {
 			$template = BTDL_Download_Template::get_template();
 		}
-		$custom_css = trim($custom_css);
 		$default_css = BTDL_Download_Template::get_default_css();
-		$css = BTDL_Download_Template::sanitize_css_for_output($default_css . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : ''));
+		$preset_css = BTDL_Download_Template::get_style_preset_css($preset);
+		$css = BTDL_Download_Template::sanitize_css_for_output($default_css . ($preset_css !== '' ? "\n\n" . $preset_css : ''));
 		$data = BTDL_Download_Template::get_preview_sample_data();
 		$card_html = BTDL_Download_Template::render($template, $data);
 		$doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>' . $css . '</style></head><body style="margin:12px;">' . $card_html . '</body></html>';
@@ -560,8 +556,9 @@ class BTDL_Download_CPT
 			return;
 		}
 		$template = BTDL_Download_Template::get_template();
-		$custom_css = trim(BTDL_Download_Template::get_custom_css());
-		$css = BTDL_Download_Template::sanitize_css_for_output(BTDL_Download_Template::get_default_css() . ($custom_css !== '' ? "\n\n/* Custom */\n" . $custom_css : ''));
+		$preset = BTDL_Download_Template::get_style_preset();
+		$preset_css = BTDL_Download_Template::get_style_preset_css($preset);
+		$css = BTDL_Download_Template::sanitize_css_for_output(BTDL_Download_Template::get_default_css() . ($preset_css !== '' ? "\n\n" . $preset_css : ''));
 		$download_id = (int) get_query_var('btdl_download_id');
 		if ($download_id > 0) {
 			$post = get_post($download_id);
@@ -607,7 +604,8 @@ class BTDL_Download_CPT
 	public static function render_template_page()
 	{
 		$template = BTDL_Download_Template::get_template();
-		$custom_css = BTDL_Download_Template::get_custom_css();
+		$selected_preset = BTDL_Download_Template::get_style_preset();
+		$presets = BTDL_Download_Template::get_style_presets();
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display-only flag from redirect after nonce-verified save
 		$updated = isset($_GET['updated']) && sanitize_text_field(wp_unslash($_GET['updated'])) === '1';
 		?>
@@ -641,15 +639,20 @@ class BTDL_Download_CPT
 
 				<hr>
 
-				<h2><?php esc_html_e('Custom CSS', 'bt-downloads'); ?></h2>
+				<h2><?php esc_html_e('Card style', 'bt-downloads'); ?></h2>
 				<p class="description">
-					<?php esc_html_e('Add custom CSS to style the download cards. Use selectors like .btdl-download-card, .dl-icon-wrap, .dl-content, etc.', 'bt-downloads'); ?>
+					<?php esc_html_e('Choose a built-in preset. For further styling, use Appearance > Customize > Additional CSS in your theme.', 'bt-downloads'); ?>
 				</p>
 				<table class="form-table">
 					<tr>
-						<td><textarea name="btdl_custom_css" id="btdl_custom_css" rows="12" class="large-text code"
-								style="font-family: monospace;"
-								placeholder=".btdl-download-card { border-radius: 8px; }"><?php echo esc_textarea($custom_css); ?></textarea>
+						<td>
+							<select name="btdl_style_preset" id="btdl_style_preset">
+								<?php foreach ($presets as $slug => $label): ?>
+									<option value="<?php echo esc_attr($slug); ?>" <?php selected($selected_preset, $slug); ?>>
+										<?php echo esc_html($label); ?>
+									</option>
+								<?php endforeach; ?>
+							</select>
 						</td>
 					</tr>
 					<tr>
@@ -684,8 +687,6 @@ class BTDL_Download_CPT
 				<p>
 					<button type="submit"
 						class="button button-primary"><?php esc_html_e('Save all', 'bt-downloads'); ?></button>
-					<button type="submit" name="btdl_css_reset" value="1" class="button"
-						onclick="return confirm('<?php echo esc_js(__('Clear custom CSS?', 'bt-downloads')); ?>');"><?php esc_html_e('Clear custom CSS', 'bt-downloads'); ?></button>
 				</p>
 			</form>
 

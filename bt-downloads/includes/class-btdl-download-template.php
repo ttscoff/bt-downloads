@@ -16,7 +16,7 @@ class BTDL_Download_Template
 {
 
 	const OPTION_KEY = 'btdl_card_template';
-	const OPTION_CSS_KEY = 'btdl_card_css';
+	const OPTION_PRESET_KEY = 'btdl_card_style_preset';
 
 	/**
 	 * Get default template.
@@ -201,24 +201,122 @@ class BTDL_Download_Template
 	}
 
 	/**
-	 * Get custom CSS.
+	 * Get available style presets.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public static function get_custom_css()
+	public static function get_style_presets()
 	{
-		return (string) get_option(self::OPTION_CSS_KEY, '');
+		return array(
+			'default' => __('Default', 'bt-downloads'),
+			'light' => __('Light', 'bt-downloads'),
+			'dark' => __('Dark', 'bt-downloads'),
+			'modern' => __('Modern', 'bt-downloads'),
+		);
 	}
 
 	/**
-	 * Save custom CSS.
+	 * Get selected style preset slug.
 	 *
-	 * @param string $css CSS.
+	 * @return string
+	 */
+	public static function get_style_preset()
+	{
+		$preset = (string) get_option(self::OPTION_PRESET_KEY, 'default');
+		$presets = self::get_style_presets();
+		return array_key_exists($preset, $presets) ? $preset : 'default';
+	}
+
+	/**
+	 * Save selected style preset slug.
+	 *
+	 * @param string $preset Preset slug.
 	 * @return bool
 	 */
-	public static function save_custom_css($css)
+	public static function save_style_preset($preset)
 	{
-		return update_option(self::OPTION_CSS_KEY, $css);
+		$preset = sanitize_key((string) $preset);
+		$presets = self::get_style_presets();
+		if (!array_key_exists($preset, $presets)) {
+			$preset = 'default';
+		}
+		return update_option(self::OPTION_PRESET_KEY, $preset);
+	}
+
+	/**
+	 * Get CSS for a style preset.
+	 *
+	 * @param string $preset Preset slug.
+	 * @return string
+	 */
+	public static function get_style_preset_css($preset)
+	{
+		switch ($preset) {
+			case 'light':
+				return '/* Preset: Light */
+.btdl-download-card {
+	background: #ffffff;
+	border-color: #d1d5db;
+	color: #374151;
+}
+.btdl-download-card .dl-icon-wrap {
+	background: #f9fafb;
+}
+.btdl-download-card .dl-title {
+	color: #111827;
+}
+.btdl-download-card .dl-link a {
+	color: #2563eb;
+}';
+			case 'dark':
+				return '/* Preset: Dark */
+.btdl-download-card {
+	background: #111827;
+	border-color: #374151;
+	color: #d1d5db;
+}
+.btdl-download-card .dl-icon-wrap {
+	background: #1f2937;
+}
+.btdl-download-card .dl-title {
+	color: #f9fafb;
+}
+.btdl-download-card .dl-description,
+.btdl-download-card .dl-meta,
+.btdl-download-card .dl-info {
+	color: #9ca3af;
+}
+.btdl-download-card .dl-link a,
+.btdl-download-card .dl-info a,
+.btdl-download-card .changelog {
+	color: #93c5fd;
+}';
+			case 'modern':
+				return '/* Preset: Modern */
+.btdl-download-card {
+	border: 0;
+	border-radius: 14px;
+	box-shadow: 0 8px 24px rgba(17, 24, 39, 0.12);
+	background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+.btdl-download-card .dl-icon-wrap {
+	background: linear-gradient(160deg, #eff6ff 0%, #e2e8f0 100%);
+}
+.btdl-download-card .dl-title {
+	font-size: 1.2rem;
+	letter-spacing: -0.01em;
+}
+.btdl-download-card .dl-link a {
+	color: #2563eb;
+	font-weight: 600;
+}
+.btdl-download-card .dl-info a,
+.btdl-download-card .changelog {
+	color: #1d4ed8;
+}';
+			default:
+				return '';
+		}
 	}
 
 	/**
@@ -232,8 +330,9 @@ class BTDL_Download_Template
 		wp_register_style('btdl-download-card', false, array(), BTDL_VERSION);
 		wp_enqueue_style('btdl-download-card');
 		$default = self::sanitize_css_for_output(self::get_default_css());
-		$custom = self::sanitize_css_for_output(trim(self::get_custom_css()));
-		$inline = $default . ($custom !== '' ? "\n\n/* Custom CSS */\n" . $custom : '');
+		$preset = self::get_style_preset();
+		$preset_css = self::sanitize_css_for_output(self::get_style_preset_css($preset));
+		$inline = $default . ($preset_css !== '' ? "\n\n" . $preset_css : '');
 		wp_add_inline_style('btdl-download-card', $inline);
 	}
 
